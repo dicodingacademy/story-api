@@ -33,6 +33,7 @@
     "better-sqlite3": "^7.4.6",
     "dotenv": "^10.0.0",
     "instances-container": "^2.0.4",
+    "joi": "^17.5.0",
     "nanoid": "^3.1.30",
     "node-cron": "^3.0.0",
     "string-strip-html": "^8.3.0"
