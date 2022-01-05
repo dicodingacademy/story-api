@@ -1,3 +1,7 @@
+import { createServer } from './Infrastructures/http';
+
 (async () => {
-  console.log('Hello World!');
+  const server = await createServer();
+  await server.start();
+  console.log(`Server running at: ${server.info.uri}`);
 })();
