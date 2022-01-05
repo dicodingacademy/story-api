@@ -29,6 +29,7 @@
     "@hapi/hapi": "^20.2.1",
     "@hapi/inert": "^6.0.4",
     "@hapi/vision": "^6.1.0",
+    "bcrypt": "^5.0.1",
     "better-sqlite3": "^7.4.6",
     "dotenv": "^10.0.0",
     "instances-container": "^2.0.4",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
+    "@types/bcrypt": "^5.0.0",
     "@types/better-sqlite3": "^7.4.2",
     "@types/hapi__hapi": "^20.0.9",
     "@types/hapi__inert": "^5.2.3",
