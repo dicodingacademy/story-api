@@ -1,6 +1,6 @@
 import Base64PasswordHash from '../Base64PasswordHash';
 
-xdescribe('BcryptPasswordHash', () => {
+describe('BcryptPasswordHash', () => {
   const passwordHash = new Base64PasswordHash();
 
   describe('hash', () => {

@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { database } from '../../../sqlite';
 
 const UsersTableTestHelper = {

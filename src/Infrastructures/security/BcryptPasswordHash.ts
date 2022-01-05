@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { hash, compare } from 'bcrypt';
 import { PasswordHash } from '../../Domains/users/security';
 
