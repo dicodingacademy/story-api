@@ -6,8 +6,11 @@ import { PasswordHash } from '../../../Domains/users/security';
 export abstract class ApplicationUseCase<Input, Output> {
   protected applicationEvent: ApplicationEvent;
 
+  public name: string;
+
   protected constructor({ applicationEvent } : UseCaseDependencies) {
     this.applicationEvent = applicationEvent;
+    this.name = this.constructor.name;
   }
 
   protected abstract run(payload: Input): Promise<Output>;
