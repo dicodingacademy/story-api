@@ -13,6 +13,9 @@ const config = {
     host: process.env.APP_HOST,
     port: process.env.APP_PORT,
   },
+  sqlite: {
+    database: process.env.SQLITE_DATABASE,
+  },
 };
 
 export default config;
