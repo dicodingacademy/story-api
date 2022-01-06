@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 import * as fs from 'fs';
+import { resolve } from 'path';
 import { StoryStorage } from '../../Domains/stories/storage';
 import { StoryPhoto } from '../../Domains/stories/entities';
 import config from '../../Commons/config';
@@ -8,9 +9,10 @@ class LocalStoryStorage implements StoryStorage {
   private readonly folder: string;
 
   constructor() {
-    this.folder = '../../Interfaces/http/public/images/stories/';
+    this.folder = resolve(__dirname, '../../Interfaces/http/public/images/stories/');
 
     if (!fs.existsSync(this.folder)) {
+      console.log(`Creating folder: ${this.folder}`);
       fs.mkdirSync(this.folder, { recursive: true });
     }
   }
@@ -21,10 +23,10 @@ class LocalStoryStorage implements StoryStorage {
 
     const fileStream = fs.createWriteStream(path);
 
-    return new Promise((resolve, reject) => {
-      fileStream.on('error', (error) => reject(error));
+    return new Promise((res, rej) => {
+      fileStream.on('error', (error) => rej(error));
       storyPhoto.file.pipe(fileStream);
-      fileStream.on('end', () => resolve(`${config.app.publicUrl}/images/stories/${filename}`));
+      fileStream.on('finish', () => res(`${config.app.publicUrl}/images/stories/${filename}`));
     });
   }
 }

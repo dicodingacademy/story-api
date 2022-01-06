@@ -10,7 +10,6 @@ import StoryCreationAggregate from '../../../Domains/stories/aggregate/StoryCrea
 type UseCasePayload = {
   userId: string;
   description: string;
-  title: string;
   photo: StoryPhoto;
   lat?: number;
   long?: number;

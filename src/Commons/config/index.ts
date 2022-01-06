@@ -19,6 +19,7 @@ const config = {
   },
   tokenize: {
     secret: process.env.TOKENIZE_SECRET,
+    age: process.env.TOKENIZE_AGE,
   },
 };
 

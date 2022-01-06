@@ -10,6 +10,7 @@ import JwtTokenize from './tokenize/JwtTokenize';
 import LoginUseCase from '../Applications/usecase/authentications/LoginUseCase';
 import LocalStoryStorage from './storage/LocalStoryStorage';
 import StoryCreationUseCase from '../Applications/usecase/stories/StoryCreationUseCase';
+import StoryRepositorySQLite from './repositories/StoryRepositorySQLite';
 
 const container = createContainer();
 
@@ -72,7 +73,7 @@ container.register([
   },
   {
     key: 'StoryRepository',
-    Class: UserRepositorySQLite,
+    Class: StoryRepositorySQLite,
   },
   {
     key: 'StoryStorage',

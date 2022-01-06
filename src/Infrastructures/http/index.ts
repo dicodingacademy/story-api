@@ -1,8 +1,10 @@
 import Hapi, { Request, ResponseToolkit } from '@hapi/hapi';
 import { Container } from 'instances-container';
+import Jwt from '@hapi/jwt';
 import config from '../../Commons/config';
 import users from '../../Interfaces/http/api/v1/users';
 import ClientError from '../../Commons/exceptions/ClientError';
+import stories from '../../Interfaces/http/api/v1/stories';
 
 export const createServer = async (container: Container) => {
   const server = Hapi.server({
@@ -16,10 +18,39 @@ export const createServer = async (container: Container) => {
     handler: () => ({ message: 'Hello, world!' }),
   });
 
+  await server.register([
+    {
+      plugin: Jwt.plugin,
+    },
+  ]);
+
+  server.auth.strategy('story_jwt', 'jwt', {
+    keys: config.tokenize.secret,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      maxAgeSec: config.tokenize.age,
+    },
+    validate: (artifacts: any) => ({
+      isValid: true,
+      credentials: {
+        userId: artifacts.decoded.payload.userId,
+      },
+    }),
+  });
+
   /* v1 */
   await server.register([
     {
       plugin: users,
+      options: { container },
+      routes: {
+        prefix: '/v1',
+      },
+    },
+    {
+      plugin: stories,
       options: { container },
       routes: {
         prefix: '/v1',
@@ -44,6 +75,8 @@ export const createServer = async (container: Container) => {
       if (!response.isServer) {
         return response;
       }
+
+      console.error(response);
 
       const newResponse = h.response({
         status: 'error',
