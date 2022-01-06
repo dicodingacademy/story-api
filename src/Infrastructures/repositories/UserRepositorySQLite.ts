@@ -44,6 +44,23 @@ class UserRepositorySQLite implements UserRepository {
       hashedPassword: result.hashed_password,
     };
   }
+
+  async findById(id: string): Promise<CreatedUser | null> {
+    const result = await this.database.prepare(
+      'SELECT * FROM users WHERE id = ?',
+    ).get(id);
+
+    if (!result) {
+      return null;
+    }
+
+    return {
+      id: result.id,
+      email: result.email,
+      name: result.name,
+      hashedPassword: result.hashed_password,
+    };
+  }
 }
 
 export default UserRepositorySQLite;

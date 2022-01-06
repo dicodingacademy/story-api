@@ -80,4 +80,29 @@ describe('UserRepositorySQLite', () => {
       expect(user.email).toBe(email);
     });
   });
+
+  describe('findById', () => {
+    it('should return null if not found', async () => {
+      // Arrange
+      const id = 'user-123';
+
+      // Action
+      const user = await userRepository.findById(id);
+
+      // Assert
+      expect(user).toBeNull();
+    });
+
+    it('should return correct user', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      const id = 'user-123';
+
+      // Action
+      const user = await userRepository.findById(id);
+
+      // Assert
+      expect(user.id).toBe(id);
+    });
+  });
 });
