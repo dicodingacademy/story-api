@@ -12,6 +12,7 @@ const config = {
   app: {
     host: process.env.APP_HOST,
     port: process.env.APP_PORT,
+    publicUrl: process.env.APP_PUBLIC_URL,
   },
   sqlite: {
     database: process.env.SQLITE_DATABASE,
