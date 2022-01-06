@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createServer } from '../../../index';
 import container from '../../../../container';
 
