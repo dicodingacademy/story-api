@@ -3,6 +3,8 @@ import { UserRepository } from '../../../Domains/users/repository';
 import { IdGenerator } from '../../../Domains/commons/utils';
 import { PasswordHash } from '../../../Domains/users/security';
 import { Tokenize } from '../../../Domains/authentications/tokenize';
+import { StoryStorage } from '../../../Domains/stories/storage';
+import { StoryRepository } from '../../../Domains/stories/repository';
 
 export abstract class ApplicationUseCase<Input, Output> {
   protected applicationEvent: ApplicationEvent;
@@ -36,6 +38,8 @@ export type UseCaseDependencies = {
   userRepository?: UserRepository,
   idGenerator?: IdGenerator,
   passwordHash?: PasswordHash,
-  applicationEvent?: ApplicationEvent
-  tokenize?: Tokenize
+  applicationEvent?: ApplicationEvent,
+  tokenize?: Tokenize,
+  storyRepository?: StoryRepository,
+  storyStorage?: StoryStorage,
 }
