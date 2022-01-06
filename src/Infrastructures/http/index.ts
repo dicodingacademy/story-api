@@ -1,7 +1,7 @@
 import Hapi, { Request, ResponseToolkit } from '@hapi/hapi';
 import { Container } from 'instances-container';
 import config from '../../Commons/config';
-import users from '../../Interfaces/http/api/users';
+import users from '../../Interfaces/http/api/v1/users';
 import ClientError from '../../Commons/exceptions/ClientError';
 
 export const createServer = async (container: Container) => {
@@ -16,10 +16,14 @@ export const createServer = async (container: Container) => {
     handler: () => ({ message: 'Hello, world!' }),
   });
 
+  /* v1 */
   await server.register([
     {
       plugin: users,
       options: { container },
+      routes: {
+        prefix: '/v1',
+      },
     },
   ]);
 

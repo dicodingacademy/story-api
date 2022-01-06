@@ -1,7 +1,7 @@
 import { Container } from 'instances-container';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import UsersRouteValidator from './validator';
-import UserCreationUseCase from '../../../../Applications/usecase/users/UserCreationUseCase';
+import UserCreationUseCase from '../../../../../Applications/usecase/users/UserCreationUseCase';
 
 class UsersHandler {
   private container: Container;
