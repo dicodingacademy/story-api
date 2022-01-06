@@ -24,6 +24,6 @@ export type CreatedStory = {
   description: string,
   createdAt: string,
   photoUrl: string,
-  lat?: number,
-  lon?: number,
+  lat: number | null,
+  lon: number | null,
 }

@@ -1,21 +1,16 @@
-import { StoryRepository } from '../repository';
 import { CreatedStory, StoryCreation } from '../entities';
 import { StoryStorage } from '../storage';
 import { IdGenerator } from '../../commons/utils';
 
 class StoryCreationAggregate {
-  private storyRepository: StoryRepository;
-
   private storyStorage: StoryStorage;
 
   private idGenerator: IdGenerator;
 
   constructor(
-    storyRepository: StoryRepository,
     storyStorage: StoryStorage,
     idGenerator: IdGenerator,
   ) {
-    this.storyRepository = storyRepository;
     this.storyStorage = storyStorage;
     this.idGenerator = idGenerator;
   }
@@ -26,6 +21,8 @@ class StoryCreationAggregate {
 
     return {
       ...storyCreation,
+      lat: storyCreation.lat ? storyCreation.lat : null,
+      lon: storyCreation.lon ? storyCreation.lon : null,
       id,
       photoUrl,
       createdAt: new Date().toISOString(),
