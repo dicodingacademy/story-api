@@ -16,6 +16,9 @@ const config = {
   sqlite: {
     database: process.env.SQLITE_DATABASE,
   },
+  tokenize: {
+    secret: process.env.TOKENIZE_SECRET,
+  },
 };
 
 export default config;
