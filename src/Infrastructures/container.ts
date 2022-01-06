@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createContainer, ParameterOption } from 'instances-container';
 import UserRepositorySQLite from './repositories/UserRepositorySQLite';
 import Base64PasswordHash from './security/Base64PasswordHash';
@@ -39,7 +40,7 @@ container.register([
   },
   {
     key: 'PasswordHash',
-    Class: process.env.ENV === 'test' ? Base64PasswordHash : BcryptPasswordHash,
+    Class: process.env.NODE_ENV === 'test' ? Base64PasswordHash : BcryptPasswordHash,
   },
   {
     key: 'ApplicationEvent',
