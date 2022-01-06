@@ -6,6 +6,8 @@ import BcryptPasswordHash from './security/BcryptPasswordHash';
 import ApplicationEventImpl from './event/ApplicationEventImpl';
 import NanoIdGenerator from './utils/NanoIdGenerator';
 import UserCreationUseCase from '../Applications/usecase/users/UserCreationUseCase';
+import JwtTokenize from './tokenize/JwtTokenize';
+import LoginUseCase from '../Applications/usecase/authentications/LoginUseCase';
 
 const container = createContainer();
 
@@ -29,6 +31,10 @@ const useCaseParameter: ParameterOption = {
       name: 'idGenerator',
       internal: 'IdGenerator',
     },
+    {
+      name: 'tokenize',
+      internal: 'Tokenize',
+    },
   ],
 };
 
@@ -50,12 +56,20 @@ container.register([
     key: 'IdGenerator',
     Class: NanoIdGenerator,
   },
+  {
+    key: 'Tokenize',
+    Class: JwtTokenize,
+  },
 ]);
 
 /** use cases */
 container.register([
   {
     Class: UserCreationUseCase,
+    parameter: useCaseParameter,
+  },
+  {
+    Class: LoginUseCase,
     parameter: useCaseParameter,
   },
 ]);
