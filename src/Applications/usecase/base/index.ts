@@ -2,6 +2,7 @@
 import { UserRepository } from '../../../Domains/users/repository';
 import { IdGenerator } from '../../../Domains/commons/utils';
 import { PasswordHash } from '../../../Domains/users/security';
+import { Tokenize } from '../../../Domains/authentications/tokenize';
 
 export abstract class ApplicationUseCase<Input, Output> {
   protected applicationEvent: ApplicationEvent;
@@ -36,4 +37,5 @@ export type UseCaseDependencies = {
   idGenerator?: IdGenerator,
   passwordHash?: PasswordHash,
   applicationEvent?: ApplicationEvent
+  tokenize?: Tokenize
 }

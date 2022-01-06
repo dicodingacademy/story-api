@@ -10,3 +10,8 @@ export type CreatedUser = {
   email: string;
   hashedPassword: string;
 }
+
+export type UserLogin = {
+  email: string;
+  password: string;
+};

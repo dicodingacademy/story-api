@@ -55,4 +55,29 @@ describe('UserRepositorySQLite', () => {
       expect(isEmailAlreadyInUse).toBe(false);
     });
   });
+
+  describe('findByEmail', () => {
+    it('should return null if not found', async () => {
+      // Arrange
+      const email = 'dimas@dicoding.com';
+
+      // Action
+      const user = await userRepository.findByEmail(email);
+
+      // Assert
+      expect(user).toBeNull();
+    });
+
+    it('should return correct user', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ email: 'dimas@dicoding.com' });
+      const email = 'dimas@dicoding.com';
+
+      // Action
+      const user = await userRepository.findByEmail(email);
+
+      // Assert
+      expect(user.email).toBe(email);
+    });
+  });
 });

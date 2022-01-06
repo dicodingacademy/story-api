@@ -5,8 +5,9 @@ import container from '../../../container';
 import { applicationEventSubscriber } from '../../../../Interfaces/event';
 import { ApplicationEvent } from '../../../../Applications/usecase/base';
 import UserCreationUseCase from '../../../../Applications/usecase/users/UserCreationUseCase';
+import ServerTestHelper from './helper/ServerTestHelper';
 
-describe('when /v1/register', () => {
+describe('users feature', () => {
   let server: Server;
 
   beforeAll(() => {
@@ -18,7 +19,7 @@ describe('when /v1/register', () => {
     server = await createServer(container);
   });
 
-  describe('POST', () => {
+  describe('when POST /v1/register', () => {
     it('should response 400 when payload not application/json', async () => {
       const response = await server.inject({
         method: 'POST',
@@ -79,6 +80,85 @@ describe('when /v1/register', () => {
         container.getInstance(UserCreationUseCase.name),
         expect.any(Object),
       );
+    });
+  });
+
+  describe('when POST /v1/login', () => {
+    it('should response 400 when payload not application/json', async () => {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/login',
+      });
+
+      expect(response.statusCode)
+        .toBe(400);
+    });
+
+    it('should response 400 when given invalid payload', async () => {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/login',
+        payload: {
+          email: 'dimas.com',
+          password: '123',
+        },
+      });
+
+      expect(response.statusCode)
+        .toBe(400);
+    });
+
+    it('should response 401 when email not registered', async () => {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/login',
+        payload: {
+          email: 'dimas@dicoding.com',
+          password: '123456',
+        },
+      });
+
+      expect(response.statusCode).toBe(401);
+    });
+
+    it('should response 401 when password not match', async () => {
+      // Arrange
+      await ServerTestHelper.registerUser({ email: 'dimas@dicoding.com', password: '123456' });
+
+      // Action
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/login',
+        payload: {
+          email: 'dimas@dicoding.com',
+          password: '1234567',
+        },
+      });
+
+      // Assert
+      expect(response.statusCode).toBe(401);
+    });
+
+    it('should response 200 when loggin was success', async () => {
+      // Arrange
+      await ServerTestHelper.registerUser({ email: 'dimas@dicoding.com', password: '123456' });
+
+      // Action
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/login',
+        payload: {
+          email: 'dimas@dicoding.com',
+          password: '123456',
+        },
+      });
+
+      // Assert
+      const payload = JSON.parse(response.payload);
+      expect(response.statusCode).toBe(200);
+      expect(payload.loginResult.userId).toBeDefined();
+      expect(payload.loginResult.token).toBeDefined();
+      expect(payload.loginResult.name).toBeDefined();
     });
   });
 });

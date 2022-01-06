@@ -27,6 +27,23 @@ class UserRepositorySQLite implements UserRepository {
       'INSERT INTO users (id, email, name, hashed_password) VALUES (?, ?, ?, ?)',
     ).run(id, email, name, hashedPassword);
   }
+
+  async findByEmail(email: string): Promise<CreatedUser | null> {
+    const result = await this.database.prepare(
+      'SELECT * FROM users WHERE email = ?',
+    ).get(email);
+
+    if (!result) {
+      return null;
+    }
+
+    return {
+      id: result.id,
+      email: result.email,
+      name: result.name,
+      hashedPassword: result.hashed_password,
+    };
+  }
 }
 
 export default UserRepositorySQLite;

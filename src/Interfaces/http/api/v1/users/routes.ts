@@ -7,6 +7,11 @@ const routes = (handler: UsersHandler) : ServerRoute[] => [
     path: '/register',
     handler: handler.postUserHandler,
   },
+  {
+    method: 'POST',
+    path: '/login',
+    handler: handler.postLoginHandler,
+  },
 ];
 
 export default routes;
