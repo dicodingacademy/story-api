@@ -25,3 +25,5 @@ jobs:
           CI: true
           APP_HOST: localhost
           APP_PORT: 5000
+          SQLITE_DATABASE: ${{ secrets.SQLITE_DATABASE }}
+          TOKENIZE_SECRET: ${{ secrets.TOKENIZE_SECRET }}
