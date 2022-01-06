@@ -2,6 +2,7 @@ import { Container } from 'instances-container';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import UsersRouteValidator from './validator';
 import UserCreationUseCase from '../../../../../Applications/usecase/users/UserCreationUseCase';
+import LoginUseCase from '../../../../../Applications/usecase/authentications/LoginUseCase';
 
 class UsersHandler {
   private container: Container;
@@ -13,6 +14,7 @@ class UsersHandler {
     this.validator = validator;
 
     this.postUserHandler = this.postUserHandler.bind(this);
+    this.postLoginHandler = this.postLoginHandler.bind(this);
   }
 
   async postUserHandler(request: Request, h: ResponseToolkit) {
@@ -27,6 +29,19 @@ class UsersHandler {
     });
     response.code(201);
     return response;
+  }
+
+  async postLoginHandler(request: Request) {
+    const payload = this.validator.validateLoginUser(request.payload);
+    const useCase = this.container.getInstance(LoginUseCase.name) as LoginUseCase;
+
+    const loginResult = await useCase.execute(payload);
+
+    return {
+      error: false,
+      message: 'success',
+      loginResult,
+    };
   }
 }
 

@@ -3,6 +3,7 @@ import InvariantError from '../../../../../Commons/exceptions/InvariantError';
 
 type UsersRouteSchema = {
   postUser: ObjectSchema
+  loginUser: ObjectSchema
 }
 
 type PostUserPayload = {
@@ -21,11 +22,25 @@ class UsersRouteValidator {
         email: Joi.string().email().required().error(new InvariantError('email is required or wrong format')),
         password: Joi.string().required().error(new InvariantError('password is required')),
       }).error(new InvariantError('invalid payload')),
+
+      loginUser: Joi.object({
+        email: Joi.string().email().required().error(new InvariantError('email is required or wrong format')),
+        password: Joi.string().required().error(new InvariantError('password is required')),
+      }).error(new InvariantError('invalid payload')),
     };
   }
 
   validatePostUser(payload: unknown) {
     const validationResult = this.schemas.postUser.validate(payload);
+    if (validationResult.error) {
+      throw validationResult.error;
+    }
+
+    return validationResult.value as PostUserPayload;
+  }
+
+  validateLoginUser(payload: unknown) {
+    const validationResult = this.schemas.loginUser.validate(payload);
     if (validationResult.error) {
       throw validationResult.error;
     }
