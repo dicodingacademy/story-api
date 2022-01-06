@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -11,6 +12,9 @@ const config = {
   app: {
     host: process.env.APP_HOST,
     port: process.env.APP_PORT,
+  },
+  sqlite: {
+    database: process.env.SQLITE_DATABASE,
   },
 };
 
