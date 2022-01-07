@@ -29,6 +29,14 @@ class LocalStoryStorage implements StoryStorage {
       fileStream.on('finish', () => res(`${config.app.publicUrl}/images/stories/${filename}`));
     });
   }
+
+  async deleteSavedStoryImage(imageName: string): Promise<void> {
+    const path = `${this.folder}/${imageName}`;
+
+    if (fs.existsSync(path)) {
+      fs.unlinkSync(path);
+    }
+  }
 }
 
 export default LocalStoryStorage;
