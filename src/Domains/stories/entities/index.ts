@@ -27,3 +27,13 @@ export type CreatedStory = {
   lat: number | null,
   lon: number | null,
 }
+
+export type Story = {
+  id: string,
+  name: string,
+  description: string,
+  createdAt: string,
+  photoUrl: string,
+  lat: number | null,
+  lon: number | null,
+}
