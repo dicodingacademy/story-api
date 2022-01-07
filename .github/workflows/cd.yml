@@ -1,0 +1,24 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH and deploy app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ~/app/dicoding-api/story-api
+            git pull origin master
+            /home/${{ secrets.SSH_USERNAME }}/.nvm/versions/node/v14.18.1/bin/npm install
+            /home/${{ secrets.SSH_USERNAME }}/.nvm/versions/node/v14.18.1/bin/pm2 restart story-api
