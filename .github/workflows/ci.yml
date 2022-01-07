@@ -27,3 +27,4 @@ jobs:
           APP_PORT: 5000
           SQLITE_DATABASE: ${{ secrets.SQLITE_DATABASE }}
           TOKENIZE_SECRET: ${{ secrets.TOKENIZE_SECRET }}
+          TOKENIZE_AGE: ${{ secrets.TOKENIZE_AGE }}
