@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import config from '../../../Commons/config';
 import { hourToMillis } from './utils';
 import container from '../../../Infrastructures/container';

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { ApplicationUseCase, UseCaseDependencies } from '../base';
 import { CreatedStory } from '../../../Domains/stories/entities';
 import { StoryRepository } from '../../../Domains/stories/repository';
