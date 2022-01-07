@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { ServerRoute } from '@hapi/hapi';
 
 const routes = () : ServerRoute[] => [
