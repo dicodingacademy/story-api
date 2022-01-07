@@ -5,11 +5,15 @@ import config from '../../Commons/config';
 import users from '../../Interfaces/http/api/v1/users';
 import ClientError from '../../Commons/exceptions/ClientError';
 import stories from '../../Interfaces/http/api/v1/stories';
+import secureResponse from './secureResponse';
 
 export const createServer = async (container: Container) => {
   const server = Hapi.server({
     host: config.app.host,
     port: config.app.port,
+    routes: {
+      cors: true,
+    },
   });
 
   server.route({
@@ -69,7 +73,7 @@ export const createServer = async (container: Container) => {
         });
 
         newResponse.code(response.statusCode);
-        return newResponse;
+        return secureResponse(newResponse);
       }
 
       if (!response.isServer) {
@@ -81,10 +85,10 @@ export const createServer = async (container: Container) => {
         message: 'terjadi kesalahan pada server kami',
       });
       newResponse.code(500);
-      return newResponse;
+      return secureResponse(newResponse);
     }
 
-    return response;
+    return secureResponse(response);
   });
 
   return server;
