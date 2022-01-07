@@ -21,6 +21,9 @@ const config = {
     secret: process.env.TOKENIZE_SECRET,
     age: process.env.TOKENIZE_AGE,
   },
+  story: {
+    deleteTimeInHours: process.env.STORY_DELETE_TIME_IN_HOURS,
+  },
 };
 
 export default config;
