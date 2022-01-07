@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { ApplicationUseCase, UseCaseDependencies } from '../base';
 import { StoryRepository } from '../../../Domains/stories/repository';
 import { Story } from '../../../Domains/stories/entities';
@@ -20,7 +21,6 @@ class ResetStoryUseCase extends ApplicationUseCase<void, void> {
 
   protected async run(): Promise<void> {
     const storyToDelete = await this.storyRepository.getAllStoriesExpectFromDicoding();
-    console.log(storyToDelete);
     const promisesToRun = storyToDelete.map(this.deleteStory);
     await Promise.all(promisesToRun);
   }
