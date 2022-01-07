@@ -10,6 +10,10 @@ const StoriesTableTestHelper = {
     return database.prepare('SELECT * FROM stories WHERE id = ?').get(id);
   },
 
+  async findAll(): Promise<any> {
+    return database.prepare('SELECT * FROM stories').all();
+  },
+
   async addStory({
     id = 'story-123',
     userId = 'user-123',

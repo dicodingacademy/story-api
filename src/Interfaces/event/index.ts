@@ -1,10 +1,11 @@
-import UserCreationUseCase from '../../Applications/usecase/users/UserCreationUseCase';
 import container from '../../Infrastructures/container';
 import { ApplicationEvent, ApplicationUseCase } from '../../Applications/usecase/base';
+import { schedulingStoryToDelete } from './listeners';
+import StoryCreationUseCase from '../../Applications/usecase/stories/StoryCreationUseCase';
 
 const subscribers = {
-  [UserCreationUseCase.name]: [
-    () => {},
+  [StoryCreationUseCase.name]: [
+    schedulingStoryToDelete,
   ],
 };
 

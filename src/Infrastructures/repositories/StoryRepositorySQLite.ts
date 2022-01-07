@@ -39,6 +39,40 @@ class StoryRepositorySQLite implements StoryRepository {
       lon: row.lon,
     }));
   }
+
+  async deleteStory(id: string): Promise<void> {
+    const statement = this.db.prepare('DELETE FROM stories WHERE id = ?');
+    statement.run(id);
+  }
+
+  async deleteAllStoriesExpectFromDicoding(): Promise<void> {
+    const statement = this.db.prepare(`DELETE FROM stories WHERE user_id != (
+        SELECT id FROM users WHERE email = 'admin@dicoding.com'
+    )`);
+    statement.run();
+  }
+
+  async getAllStoriesExpectFromDicoding(): Promise<Story[]> {
+    const statement = this.db.prepare(`
+        SELECT stories.id, users.name, stories.description, stories.created_at, stories.photo_url, stories.lat, stories.lon 
+        FROM stories
+        LEFT JOIN users ON stories.user_id = users.id
+        WHERE stories.user_id != (
+            SELECT id FROM users WHERE email = 'admin@dicoding.com'
+        )`);
+
+    const rows = statement.all();
+
+    return rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      description: row.description,
+      photoUrl: row.photo_url,
+      createdAt: row.created_at,
+      lat: row.lat,
+      lon: row.lon,
+    }));
+  }
 }
 
 export default StoryRepositorySQLite;

@@ -83,4 +83,84 @@ describe('StoryRepositorySQLite', () => {
       expect(stories[1].lon).toBe(106.1);
     });
   });
+
+  describe('deleteStory', () => {
+    it('should delete the story', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'dimas', email: 'dimas@dicoding.com' });
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      await storyRepository.deleteStory('story-123');
+
+      const story = await StoriesTableTestHelper.findById('story-123');
+
+      expect(story).toBeFalsy();
+    });
+  });
+
+  describe('deleteAllStoriesExpectFromDicoding', () => {
+    it('should delete all stories expect from admin@dicoding.com', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'dimas', email: 'dimas@dicoding.com' });
+      await UsersTableTestHelper.addUser({ id: 'user-456', name: 'admin', email: 'admin@dicoding.com' });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-456',
+        userId: 'user-456',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      await storyRepository.deleteAllStoriesExpectFromDicoding();
+
+      const stories = await StoriesTableTestHelper.findAll();
+
+      expect(stories.length).toBe(1);
+    });
+  });
+
+  describe('getAllStoriesExpectFromDicoding', () => {
+    it('should return all stories except from admin@dicoding.com', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'dimas', email: 'dimas@dicoding.com' });
+      await UsersTableTestHelper.addUser({ id: 'user-456', name: 'admin', email: 'admin@dicoding.com' });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-456',
+        userId: 'user-456',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      const stories = await storyRepository.getAllStoriesExpectFromDicoding();
+
+      expect(stories.length).toBe(1);
+    });
+  });
 });
