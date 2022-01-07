@@ -73,6 +73,19 @@ class StoryRepositorySQLite implements StoryRepository {
       lon: row.lon,
     }));
   }
+
+  async isStoryOwnedByDicodingAdmin(id: string): Promise<boolean> {
+    const statement = this.db.prepare(`
+        SELECT stories.id, users.email
+        FROM stories
+        LEFT JOIN users ON stories.user_id = users.id
+        WHERE stories.id = ?
+        AND users.email = 'admin@dicoding.com'
+    `);
+
+    const row = statement.get(id);
+    return !!row;
+  }
 }
 
 export default StoryRepositorySQLite;

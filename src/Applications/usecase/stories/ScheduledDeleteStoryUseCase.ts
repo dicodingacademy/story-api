@@ -9,7 +9,7 @@ type UseCasePayload = {
   createdStory: CreatedStory
 }
 
-class DeleteStoryUseCase extends ApplicationUseCase<UseCasePayload, void> {
+class ScheduledDeleteStoryUseCase extends ApplicationUseCase<UseCasePayload, void> {
   private storyRepository: StoryRepository;
 
   private storyStorage: StoryStorage;
@@ -24,10 +24,18 @@ class DeleteStoryUseCase extends ApplicationUseCase<UseCasePayload, void> {
 
   protected async run({ createdStory }: UseCasePayload): Promise<void> {
     const { id, photoUrl } = createdStory;
+    const isOwnedByAdmin = await this.storyRepository.isStoryOwnedByDicodingAdmin(id);
+
+    if (isOwnedByAdmin) {
+      console.log(`Story ${id} owned by admin, skipping deletion`);
+      return;
+    }
+
     const filename = getLastPathInUrl(photoUrl);
     await this.storyStorage.deleteSavedStoryImage(filename);
     await this.storyRepository.deleteStory(id);
+    console.log(`Story ${id} deleted`);
   }
 }
 
-export default DeleteStoryUseCase;
+export default ScheduledDeleteStoryUseCase;

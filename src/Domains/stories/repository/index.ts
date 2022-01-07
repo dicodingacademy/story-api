@@ -7,4 +7,5 @@ export interface StoryRepository {
   deleteStory(id: string) : Promise<void>;
   deleteAllStoriesExpectFromDicoding() : Promise<void>;
   getAllStoriesExpectFromDicoding() : Promise<Story[]>;
+  isStoryOwnedByDicodingAdmin(id: string) : Promise<boolean>;
 }
