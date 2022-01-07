@@ -3,6 +3,7 @@ import { Request, ResponseToolkit } from '@hapi/hapi';
 import StoriesRouteValidator from './validator';
 import StoryCreationUseCase from '../../../../../Applications/usecase/stories/StoryCreationUseCase';
 import { StoryPhoto } from '../../../../../Domains/stories/entities';
+import GetAllStoriesUseCase from '../../../../../Applications/usecase/stories/GetAllStoriesUseCase';
 
 type Credentials = {
   userId: string;
@@ -18,6 +19,7 @@ class StoriesHandler {
     this.validator = validator;
 
     this.postStoryHandler = this.postStoryHandler.bind(this);
+    this.getStoriesHandler = this.getStoriesHandler.bind(this);
   }
 
   async postStoryHandler(request: Request, h: ResponseToolkit) {
@@ -46,6 +48,18 @@ class StoriesHandler {
     });
     response.code(201);
     return response;
+  }
+
+  async getStoriesHandler(request: Request) {
+    const { userId } = request.auth.credentials as Credentials;
+    const useCase = this.container.getInstance(GetAllStoriesUseCase.name) as GetAllStoriesUseCase;
+    const stories = await useCase.execute({ userId });
+
+    return {
+      error: false,
+      message: 'Stories fetched successfully',
+      listStory: stories,
+    };
   }
 }
 

@@ -18,6 +18,14 @@ const routes = (handler: StoriesHandler): ServerRoute[] => [
       },
     },
   },
+  {
+    method: 'GET',
+    path: '/stories',
+    handler: handler.getStoriesHandler,
+    options: {
+      auth: 'story_jwt',
+    },
+  },
 ];
 
 export default routes;

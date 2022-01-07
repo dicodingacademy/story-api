@@ -120,4 +120,38 @@ describe('stories', () => {
       expect(response.statusCode).toBe(401);
     });
   });
+
+  describe('when GET /v1/stories', () => {
+    it('should response 401 when user not found', async () => {
+      await UsersTableTestHelper.cleanTable();
+
+      const response = await server.inject({
+        method: 'GET',
+        url: '/v1/stories',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      expect(response.statusCode).toBe(401);
+    });
+
+    it('should response 200 and return all listStory', async () => {
+      await UsersTableTestHelper.addUser({ email: 'dimas@dicoding.org' });
+      await StoriesTableTestHelper.addStory({ id: 'story-123' });
+      await StoriesTableTestHelper.addStory({ id: 'story-456' });
+
+      const response = await server.inject({
+        method: 'GET',
+        url: '/v1/stories',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const payload = JSON.parse(response.payload);
+      expect(response.statusCode).toBe(200);
+      expect(payload.listStory.length).toBe(2);
+    });
+  });
 });
