@@ -28,3 +28,4 @@ jobs:
           SQLITE_DATABASE: ${{ secrets.SQLITE_DATABASE }}
           TOKENIZE_SECRET: ${{ secrets.TOKENIZE_SECRET }}
           TOKENIZE_AGE: ${{ secrets.TOKENIZE_AGE }}
+          STORY_DELETE_TIME_IN_HOURS: ${{ secrets.STORY_DELETE_TIME_IN_HOURS }}
