@@ -38,4 +38,49 @@ describe('StoryRepositorySQLite', () => {
       expect(story.lon).toBe(106.1);
     });
   });
+
+  describe('getAllStories', () => {
+    it('should return all stories in database', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'dimas', email: 'dimas@dicoding.com' });
+      await UsersTableTestHelper.addUser({ id: 'user-456', name: 'arif', email: 'arif@dicoding.com' });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-456',
+        userId: 'user-456',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      const stories = await storyRepository.getAllStories();
+
+      expect(stories.length).toBe(2);
+
+      expect(stories[0].id).toBe('story-123');
+      expect(stories[0].name).toBe('dimas');
+      expect(stories[0].description).toBe('description');
+      expect(stories[0].photoUrl).toBe('https://photo.com');
+      expect(stories[0].createdAt).toBeTruthy();
+      expect(stories[0].lat).toBe(-6.2);
+      expect(stories[0].lon).toBe(106.1);
+
+      expect(stories[1].id).toBe('story-456');
+      expect(stories[1].name).toBe('arif');
+      expect(stories[1].description).toBe('description');
+      expect(stories[1].photoUrl).toBe('https://photo.com');
+      expect(stories[1].createdAt).toBeTruthy();
+      expect(stories[1].lat).toBe(-6.2);
+      expect(stories[1].lon).toBe(106.1);
+    });
+  });
 });

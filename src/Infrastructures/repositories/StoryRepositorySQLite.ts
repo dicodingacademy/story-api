@@ -1,6 +1,6 @@
 import { Database } from 'better-sqlite3';
 import { StoryRepository } from '../../Domains/stories/repository';
-import { CreatedStory } from '../../Domains/stories/entities';
+import { CreatedStory, Story } from '../../Domains/stories/entities';
 import { database } from '../sqlite';
 
 class StoryRepositorySQLite implements StoryRepository {
@@ -19,6 +19,25 @@ class StoryRepositorySQLite implements StoryRepository {
     );
 
     statement.run(id, userId, description, photoUrl, createdAt, lat, lon);
+  }
+
+  async getAllStories(): Promise<Story[]> {
+    const statement = this.db.prepare(`
+        SELECT stories.id, users.name, stories.description, stories.created_at, stories.photo_url, stories.lat, stories.lon 
+        FROM stories
+        LEFT JOIN users ON stories.user_id = users.id`);
+
+    const rows = statement.all();
+
+    return rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      description: row.description,
+      photoUrl: row.photo_url,
+      createdAt: row.created_at,
+      lat: row.lat,
+      lon: row.lon,
+    }));
   }
 }
 
