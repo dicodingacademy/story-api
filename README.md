@@ -1,6 +1,8 @@
 # Story API
 API ini digunakan hanya untuk keperluan kelas Dicoding Academy.
 
+**Peringatan:** dokumen ini masih dalam tahap pengembangan.
+
 ## Cara menjalankan secara lokal
 1. Instal [Node.js](https://nodejs.org/en/)
 2. Clone [GitHub Repository Ini](https://github.com/dicodingacademy/story-api.git) atau unduh zip file tersebut.
