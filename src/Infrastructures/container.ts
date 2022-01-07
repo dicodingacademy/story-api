@@ -11,6 +11,7 @@ import LoginUseCase from '../Applications/usecase/authentications/LoginUseCase';
 import LocalStoryStorage from './storage/LocalStoryStorage';
 import StoryCreationUseCase from '../Applications/usecase/stories/StoryCreationUseCase';
 import StoryRepositorySQLite from './repositories/StoryRepositorySQLite';
+import GetAllStoriesUseCase from '../Applications/usecase/stories/GetAllStoriesUseCase';
 
 const container = createContainer();
 
@@ -93,6 +94,10 @@ container.register([
   },
   {
     Class: StoryCreationUseCase,
+    parameter: useCaseParameter,
+  },
+  {
+    Class: GetAllStoriesUseCase,
     parameter: useCaseParameter,
   },
 ]);
