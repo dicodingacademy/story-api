@@ -8,6 +8,10 @@ import NanoIdGenerator from './utils/NanoIdGenerator';
 import UserCreationUseCase from '../Applications/usecase/users/UserCreationUseCase';
 import JwtTokenize from './tokenize/JwtTokenize';
 import LoginUseCase from '../Applications/usecase/authentications/LoginUseCase';
+import LocalStoryStorage from './storage/LocalStoryStorage';
+import StoryCreationUseCase from '../Applications/usecase/stories/StoryCreationUseCase';
+import StoryRepositorySQLite from './repositories/StoryRepositorySQLite';
+import GetAllStoriesUseCase from '../Applications/usecase/stories/GetAllStoriesUseCase';
 
 const container = createContainer();
 
@@ -35,6 +39,14 @@ const useCaseParameter: ParameterOption = {
       name: 'tokenize',
       internal: 'Tokenize',
     },
+    {
+      name: 'storyRepository',
+      internal: 'StoryRepository',
+    },
+    {
+      name: 'storyStorage',
+      internal: 'StoryStorage',
+    },
   ],
 };
 
@@ -60,6 +72,14 @@ container.register([
     key: 'Tokenize',
     Class: JwtTokenize,
   },
+  {
+    key: 'StoryRepository',
+    Class: StoryRepositorySQLite,
+  },
+  {
+    key: 'StoryStorage',
+    Class: LocalStoryStorage,
+  },
 ]);
 
 /** use cases */
@@ -70,6 +90,14 @@ container.register([
   },
   {
     Class: LoginUseCase,
+    parameter: useCaseParameter,
+  },
+  {
+    Class: StoryCreationUseCase,
+    parameter: useCaseParameter,
+  },
+  {
+    Class: GetAllStoriesUseCase,
     parameter: useCaseParameter,
   },
 ]);

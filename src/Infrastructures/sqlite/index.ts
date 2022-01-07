@@ -8,9 +8,19 @@ const migrateTable = (database: Database) => {
       name VARCHAR(255) NOT NULL,
       email VARCHAR(255) NOT NULL UNIQUE,
       hashed_password TEXT NOT NULL);
+  
+  CREATE TABLE IF NOT EXISTS stories (
+      id VARCHAR(255) PRIMARY KEY,
+      user_id VARCHAR(255) NOT NULL,
+      description TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      photo_url TEXT NOT NULL,
+      lat REAL,
+      lon REAL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);
   `;
 
-  database.prepare(query).run();
+  database.exec(query);
 };
 
 const createDatabase = () => {

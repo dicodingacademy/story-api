@@ -16,6 +16,21 @@ const ServerTestHelper = {
       },
     });
   },
+
+  async loginUser({ email = 'dimas@dicoding.com', password = '123456' }: any = {}) {
+    const server = await createServer(container);
+
+    const response = await server.inject({
+      method: 'POST',
+      url: '/v1/login',
+      payload: {
+        email,
+        password,
+      },
+    });
+
+    return JSON.parse(response.payload);
+  },
 };
 
 export default ServerTestHelper;

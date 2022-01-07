@@ -33,10 +33,12 @@
     "bcrypt": "^5.0.1",
     "better-sqlite3": "^7.4.6",
     "dotenv": "^10.0.0",
+    "form-data": "^4.0.0",
     "instances-container": "^2.0.4",
     "joi": "^17.5.0",
     "nanoid": "^3.1.30",
     "node-cron": "^3.0.0",
+    "stream-to-promise": "^3.0.0",
     "string-strip-html": "^8.3.0"
   },
   "devDependencies": {
@@ -49,6 +51,7 @@
     "@types/hapi__jwt": "^2.0.1",
     "@types/jest": "^27.0.2",
     "@types/node-cron": "^3.0.0",
+    "@types/stream-to-promise": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^7.32.0",
