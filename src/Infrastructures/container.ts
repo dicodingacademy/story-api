@@ -12,6 +12,7 @@ import LocalStoryStorage from './storage/LocalStoryStorage';
 import StoryCreationUseCase from '../Applications/usecase/stories/StoryCreationUseCase';
 import StoryRepositorySQLite from './repositories/StoryRepositorySQLite';
 import GetAllStoriesUseCase from '../Applications/usecase/stories/GetAllStoriesUseCase';
+import DeleteStoryUseCase from '../Applications/usecase/stories/DeleteStoryUseCase';
 
 const container = createContainer();
 
@@ -98,6 +99,10 @@ container.register([
   },
   {
     Class: GetAllStoriesUseCase,
+    parameter: useCaseParameter,
+  },
+  {
+    Class: DeleteStoryUseCase,
     parameter: useCaseParameter,
   },
 ]);
