@@ -17,7 +17,7 @@ const migrateTable = (database: Database) => {
       photo_url TEXT NOT NULL,
       lat REAL,
       lon REAL,
-      FOREIGN KEY (user_id) REFERENCES users(id));
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);
   `;
 
   database.exec(query);

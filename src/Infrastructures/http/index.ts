@@ -76,8 +76,6 @@ export const createServer = async (container: Container) => {
         return response;
       }
 
-      console.error(response);
-
       const newResponse = h.response({
         status: 'error',
         message: 'terjadi kesalahan pada server kami',

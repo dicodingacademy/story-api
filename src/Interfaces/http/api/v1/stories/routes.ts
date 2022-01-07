@@ -13,6 +13,7 @@ const routes = (handler: StoriesHandler): ServerRoute[] => [
         multipart: {
           output: 'stream',
         },
+        parse: true,
         maxBytes: 500000,
       },
     },
