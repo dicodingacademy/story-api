@@ -163,4 +163,40 @@ describe('StoryRepositorySQLite', () => {
       expect(stories.length).toBe(1);
     });
   });
+
+  describe('isStoryOwnedByDicodingAdmin', () => {
+    it('should return false if story not owned by admin@dicoding.com', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'dimas', email: 'dimas@dicoding.com' });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      const isStoryOwnedByDicodingAdmin = await storyRepository.isStoryOwnedByDicodingAdmin('story-123');
+
+      expect(isStoryOwnedByDicodingAdmin).toBeFalsy();
+    });
+
+    it('should return true if story owned by admin@dicoding.com', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'admin', email: 'admin@dicoding.com' });
+
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      const isStoryOwnedByDicodingAdmin = await storyRepository.isStoryOwnedByDicodingAdmin('story-123');
+
+      expect(isStoryOwnedByDicodingAdmin).toBeTruthy();
+    });
+  });
 });
