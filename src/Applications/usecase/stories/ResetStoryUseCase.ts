@@ -14,10 +14,13 @@ class ResetStoryUseCase extends ApplicationUseCase<void, void> {
     const { storyRepository, storyStorage } = dependencies;
     this.storyRepository = storyRepository;
     this.storyStorage = storyStorage;
+
+    this.deleteStory = this.deleteStory.bind(this);
   }
 
   protected async run(): Promise<void> {
     const storyToDelete = await this.storyRepository.getAllStoriesExpectFromDicoding();
+    console.log(storyToDelete);
     const promisesToRun = storyToDelete.map(this.deleteStory);
     await Promise.all(promisesToRun);
   }
