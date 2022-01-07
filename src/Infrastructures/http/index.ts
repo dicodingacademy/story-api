@@ -6,6 +6,7 @@ import users from '../../Interfaces/http/api/v1/users';
 import ClientError from '../../Commons/exceptions/ClientError';
 import stories from '../../Interfaces/http/api/v1/stories';
 import secureResponse from './secureResponse';
+import homeV1 from '../../Interfaces/http/api/v1/home';
 
 export const createServer = async (container: Container) => {
   const server = Hapi.server({
@@ -56,6 +57,12 @@ export const createServer = async (container: Container) => {
     {
       plugin: stories,
       options: { container },
+      routes: {
+        prefix: '/v1',
+      },
+    },
+    {
+      plugin: homeV1,
       routes: {
         prefix: '/v1',
       },
