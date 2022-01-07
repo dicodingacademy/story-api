@@ -10,6 +10,9 @@ export const createServer = async (container: Container) => {
   const server = Hapi.server({
     host: config.app.host,
     port: config.app.port,
+    routes: {
+      cors: true,
+    },
   });
 
   server.route({
