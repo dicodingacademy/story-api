@@ -83,4 +83,24 @@ describe('StoryRepositorySQLite', () => {
       expect(stories[1].lon).toBe(106.1);
     });
   });
+
+  describe('deleteStory', () => {
+    it('should delete the story', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-123', name: 'dimas', email: 'dimas@dicoding.com' });
+      await StoriesTableTestHelper.addStory({
+        id: 'story-123',
+        userId: 'user-123',
+        description: 'description',
+        photoUrl: 'https://photo.com',
+        lat: -6.2,
+        lon: 106.1,
+      });
+
+      await storyRepository.deleteStory('story-123');
+
+      const story = await StoriesTableTestHelper.findById('story-123');
+
+      expect(story).toBeFalsy();
+    });
+  });
 });

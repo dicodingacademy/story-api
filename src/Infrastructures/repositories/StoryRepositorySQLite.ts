@@ -39,6 +39,11 @@ class StoryRepositorySQLite implements StoryRepository {
       lon: row.lon,
     }));
   }
+
+  async deleteStory(id: string): Promise<void> {
+    const statement = this.db.prepare('DELETE FROM stories WHERE id = ?');
+    statement.run(id);
+  }
 }
 
 export default StoryRepositorySQLite;
