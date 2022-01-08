@@ -1,9 +1,9 @@
 import { Container } from 'instances-container';
 import { Request, ResponseToolkit } from '@hapi/hapi';
-import StoriesRouteValidator from './validator';
-import StoryCreationUseCase from '../../../../../Applications/usecase/stories/StoryCreationUseCase';
-import { StoryPhoto } from '../../../../../Domains/stories/entities';
-import GetAllStoriesUseCase from '../../../../../Applications/usecase/stories/GetAllStoriesUseCase';
+import { StoryPhoto } from '@Domains/stories/entities';
+import StoryCreationUseCase from '@Applications/usecase/stories/StoryCreationUseCase';
+import StoriesRouteValidator from '@Interfaces/http/api/v1/stories/validator';
+import GetAllStoriesUseCase from '@Applications/usecase/stories/GetAllStoriesUseCase';
 
 type Credentials = {
   userId: string;

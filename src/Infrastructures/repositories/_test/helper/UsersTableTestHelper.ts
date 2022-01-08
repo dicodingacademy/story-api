@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
-import { database } from '../../../sqlite';
+import { database } from '@Infrastructures/sqlite';
 
 const UsersTableTestHelper = {
   async cleanTable() {

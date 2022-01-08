@@ -1,4 +1,4 @@
-import ClientError from './ClientError';
+import ClientError from '@Commons/exceptions/ClientError';
 
 class AuthenticationError extends ClientError {
   constructor(message: string) {

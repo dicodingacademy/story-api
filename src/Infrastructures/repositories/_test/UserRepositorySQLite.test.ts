@@ -1,6 +1,6 @@
-import UserRepositorySQLite from '../UserRepositorySQLite';
-import { CreatedUser } from '../../../Domains/users/entities';
-import UsersTableTestHelper from './helper/UsersTableTestHelper';
+import { CreatedUser } from '@Domains/users/entities';
+import UsersTableTestHelper from '@Infrastructures/repositories/_test/helper/UsersTableTestHelper';
+import UserRepositorySQLite from '@Infrastructures/repositories/UserRepositorySQLite';
 
 describe('UserRepositorySQLite', () => {
   const userRepository = new UserRepositorySQLite();

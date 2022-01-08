@@ -1,8 +1,8 @@
-import { UserRepository } from '../repository';
-import { CreatedUser, UserCreation } from '../entities';
-import { PasswordHash } from '../security';
-import InvariantError from '../../../Commons/exceptions/InvariantError';
-import { IdGenerator } from '../../commons/utils';
+import { UserRepository } from '@Domains/users/repository';
+import { PasswordHash } from '@Domains/users/security';
+import { IdGenerator } from '@Domains/commons/utils';
+import { CreatedUser, UserCreation } from '@Domains/users/entities';
+import InvariantError from '@Commons/exceptions/InvariantError';
 
 class UserCreationAggregate {
   private userRepository: UserRepository;

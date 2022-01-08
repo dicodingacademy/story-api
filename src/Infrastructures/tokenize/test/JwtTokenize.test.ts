@@ -1,6 +1,6 @@
 import Jwt from '@hapi/jwt';
-import JwtTokenize from '../JwtTokenize';
-import config from '../../../Commons/config';
+import JwtTokenize from '@Infrastructures/tokenize/JwtTokenize';
+import config from '@Commons/config';
 
 describe('JwtTokenize', () => {
   const tokenize = new JwtTokenize();

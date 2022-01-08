@@ -1,9 +1,10 @@
 /* istanbul ignore file */
+
+import { CreatedStory } from '@Domains/stories/entities';
+import { StoryRepository } from '@Domains/stories/repository';
+import { StoryStorage } from '@Domains/stories/storage';
+import { getLastPathInUrl } from '@Applications/utils';
 import { ApplicationUseCase, UseCaseDependencies } from '../base';
-import { CreatedStory } from '../../../Domains/stories/entities';
-import { StoryRepository } from '../../../Domains/stories/repository';
-import { StoryStorage } from '../../../Domains/stories/storage';
-import { getLastPathInUrl } from '../../utils';
 
 type UseCasePayload = {
   createdStory: CreatedStory

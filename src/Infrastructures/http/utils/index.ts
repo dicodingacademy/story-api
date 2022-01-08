@@ -1,5 +1,5 @@
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import ClientError from '../../../Commons/exceptions/ClientError';
+import ClientError from '@Commons/exceptions/ClientError';
 
 export const secureResponse = (response: ResponseObject) => {
   response.header('Content-Security-Policy', 'upgrade-insecure-requests');

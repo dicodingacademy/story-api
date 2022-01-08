@@ -1,6 +1,6 @@
-import { createServer } from './Infrastructures/http';
-import container from './Infrastructures/container';
-import { applicationEventSubscriber } from './Interfaces/event';
+import { createServer } from '@Infrastructures/http';
+import container from '@Infrastructures/container';
+import { applicationEventSubscriber } from '@Interfaces/event';
 import ResetStoryUseCase from './Applications/usecase/stories/ResetStoryUseCase';
 
 const resetStories = async () => {

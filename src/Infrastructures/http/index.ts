@@ -1,10 +1,10 @@
 import Hapi from '@hapi/hapi';
 import { Container } from 'instances-container';
-import { preResponseMiddleware } from './utils';
-import { registerExternalPlugins, registerInternalPlugins } from './plugins';
-import { options } from './config';
-import { configureJwtAuth } from './auth';
-import { routes } from './routes';
+import { options } from '@Infrastructures/http/config';
+import { registerExternalPlugins, registerInternalPlugins } from '@Infrastructures/http/plugins';
+import { configureJwtAuth } from '@Infrastructures/http/auth';
+import { preResponseMiddleware } from '@Infrastructures/http/utils';
+import { routes } from '@Infrastructures/http/routes';
 
 export const createServer = async (container: Container) => {
   const server = Hapi.server(options);

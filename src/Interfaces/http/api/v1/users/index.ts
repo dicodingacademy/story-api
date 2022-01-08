@@ -1,8 +1,8 @@
 import { Server } from '@hapi/hapi';
 import { Container } from 'instances-container';
-import UsersHandler from './handler';
-import UsersRouteValidator from './validator';
-import routes from './routes';
+import UsersHandler from '@Interfaces/http/api/v1/users/handler';
+import UsersRouteValidator from '@Interfaces/http/api/v1/users/validator';
+import routes from '@Interfaces/http/api/v1/users/routes';
 
 const users = {
   name: 'users',

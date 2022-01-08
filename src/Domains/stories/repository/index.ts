@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { CreatedStory, Story } from '../entities';
+
+import { CreatedStory, Story } from '@Domains/stories/entities';
 
 export interface StoryRepository {
   persist(createdStory: CreatedStory) : Promise<void>;

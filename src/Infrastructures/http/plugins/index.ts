@@ -1,9 +1,9 @@
 import Inert from '@hapi/inert';
 import { Server } from '@hapi/hapi';
 import { Container } from 'instances-container';
-import users from '../../../Interfaces/http/api/v1/users';
-import stories from '../../../Interfaces/http/api/v1/stories';
-import homeV1 from '../../../Interfaces/http/api/v1/home';
+import users from '@Interfaces/http/api/v1/users';
+import stories from '@Interfaces/http/api/v1/stories';
+import homeV1 from '@Interfaces/http/api/v1/home';
 
 const externalPlugins = () => [
   {

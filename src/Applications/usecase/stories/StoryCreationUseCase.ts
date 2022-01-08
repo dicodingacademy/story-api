@@ -1,11 +1,11 @@
-import { ApplicationUseCase, UseCaseDependencies } from '../base';
-import { CreatedStory, StoryPhoto } from '../../../Domains/stories/entities';
-import { UserRepository } from '../../../Domains/users/repository';
-import { StoryRepository } from '../../../Domains/stories/repository';
-import { IdGenerator } from '../../../Domains/commons/utils';
-import { StoryStorage } from '../../../Domains/stories/storage';
-import AuthenticationError from '../../../Commons/exceptions/AuthenticationError';
-import StoryCreationAggregate from '../../../Domains/stories/aggregate/StoryCreationAggregate';
+import { CreatedStory, StoryPhoto } from '@Domains/stories/entities';
+import { UserRepository } from '@Domains/users/repository';
+import { StoryRepository } from '@Domains/stories/repository';
+import { IdGenerator } from '@Domains/commons/utils';
+import { StoryStorage } from '@Domains/stories/storage';
+import AuthenticationError from '@Commons/exceptions/AuthenticationError';
+import StoryCreationAggregate from '@Domains/stories/aggregate/StoryCreationAggregate';
+import { ApplicationUseCase, UseCaseDependencies } from '@Applications/usecase/base';
 
 type UseCasePayload = {
   userId: string;

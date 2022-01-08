@@ -1,9 +1,9 @@
 /* istanbul ignore file */
-import config from '../../../Commons/config';
-import { hourToMillis } from './utils';
-import container from '../../../Infrastructures/container';
-import ScheduledDeleteStoryUseCase from '../../../Applications/usecase/stories/ScheduledDeleteStoryUseCase';
-import { CreatedStory } from '../../../Domains/stories/entities';
+import container from '@Infrastructures/container';
+import { hourToMillis } from '@Interfaces/event/listeners/utils';
+import { CreatedStory } from '@Domains/stories/entities';
+import ScheduledDeleteStoryUseCase from '@Applications/usecase/stories/ScheduledDeleteStoryUseCase';
+import config from '@Commons/config';
 
 export const schedulingStoryToDelete = ({ output }: { output: CreatedStory }) => {
   const scheduleInMillis = hourToMillis(Number(config.story.deleteTimeInHours));

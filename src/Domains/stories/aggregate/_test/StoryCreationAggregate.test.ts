@@ -1,7 +1,7 @@
-import StoryCreationAggregate from '../StoryCreationAggregate';
-import { StoryStorage } from '../../storage';
-import { IdGenerator } from '../../../commons/utils';
-import { StoryCreation, StoryPhoto } from '../../entities';
+import { StoryStorage } from '@Domains/stories/storage';
+import { IdGenerator } from '@Domains/commons/utils';
+import StoryCreationAggregate from '@Domains/stories/aggregate/StoryCreationAggregate';
+import { StoryCreation, StoryPhoto } from '@Domains/stories/entities';
 
 describe('StoryCreationAggregate', () => {
   const storyStorage = <StoryStorage>{};

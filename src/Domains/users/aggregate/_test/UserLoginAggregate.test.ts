@@ -1,7 +1,7 @@
-import { UserRepository } from '../../repository';
-import UserLoginAggregate from '../UserLoginAggregate';
-import AuthenticationError from '../../../../Commons/exceptions/AuthenticationError';
-import { PasswordHash } from '../../security';
+import { UserRepository } from '@Domains/users/repository';
+import { PasswordHash } from '@Domains/users/security';
+import UserLoginAggregate from '@Domains/users/aggregate/UserLoginAggregate';
+import AuthenticationError from '@Commons/exceptions/AuthenticationError';
 
 describe('UserLoginAggregate', () => {
   const userRepository = <UserRepository>{};

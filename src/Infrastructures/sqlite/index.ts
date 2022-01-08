@@ -1,5 +1,5 @@
 import DB, { Database } from 'better-sqlite3';
-import config from '../../Commons/config';
+import config from '@Commons/config';
 
 const migrateTable = (database: Database) => {
   const query = `

@@ -1,5 +1,5 @@
 import Joi, { ObjectSchema } from 'joi';
-import InvariantError from '../../../../../Commons/exceptions/InvariantError';
+import InvariantError from '@Commons/exceptions/InvariantError';
 
 type UsersRouteSchema = {
   postUser: ObjectSchema

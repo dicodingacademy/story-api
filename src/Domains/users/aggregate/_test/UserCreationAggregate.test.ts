@@ -1,9 +1,9 @@
-import { UserRepository } from '../../repository';
-import UserCreationAggregate from '../UserCreationAggregate';
-import { UserCreation } from '../../entities';
-import { PasswordHash } from '../../security';
-import InvariantError from '../../../../Commons/exceptions/InvariantError';
-import { IdGenerator } from '../../../commons/utils';
+import { UserRepository } from '@Domains/users/repository';
+import { PasswordHash } from '@Domains/users/security';
+import { IdGenerator } from '@Domains/commons/utils';
+import UserCreationAggregate from '@Domains/users/aggregate/UserCreationAggregate';
+import { UserCreation } from '@Domains/users/entities';
+import InvariantError from '@Commons/exceptions/InvariantError';
 
 describe('UserCreationAggregate', () => {
   const userRepository = <UserRepository>{};

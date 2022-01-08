@@ -1,6 +1,6 @@
 import { Database } from 'better-sqlite3';
-import { StoryRepository } from '../../Domains/stories/repository';
-import { CreatedStory, Story } from '../../Domains/stories/entities';
+import { StoryRepository } from '@Domains/stories/repository';
+import { CreatedStory, Story } from '@Domains/stories/entities';
 import { database } from '../sqlite';
 
 class StoryRepositorySQLite implements StoryRepository {

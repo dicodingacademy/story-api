@@ -1,10 +1,10 @@
-import { ApplicationUseCase, UseCaseDependencies } from '../base';
-import { UserLogin } from '../../../Domains/users/entities';
-import { Authenticated } from '../../../Domains/authentications/entities';
-import { UserRepository } from '../../../Domains/users/repository';
-import { PasswordHash } from '../../../Domains/users/security';
-import { Tokenize } from '../../../Domains/authentications/tokenize';
-import UserLoginAggregate from '../../../Domains/users/aggregate/UserLoginAggregate';
+import { UserLogin } from '@Domains/users/entities';
+import { Authenticated } from '@Domains/authentications/entities';
+import { UserRepository } from '@Domains/users/repository';
+import { PasswordHash } from '@Domains/users/security';
+import { Tokenize } from '@Domains/authentications/tokenize';
+import UserLoginAggregate from '@Domains/users/aggregate/UserLoginAggregate';
+import { ApplicationUseCase, UseCaseDependencies } from '@Applications/usecase/base';
 
 class LoginUseCase extends ApplicationUseCase<UserLogin, Authenticated> {
   private readonly userRepository: UserRepository;

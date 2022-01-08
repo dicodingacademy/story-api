@@ -1,4 +1,4 @@
-import { hourToMillis } from '../utils';
+import { hourToMillis } from '@Interfaces/event/listeners/utils';
 
 describe('utils', () => {
   describe('hourToMillis', () => {

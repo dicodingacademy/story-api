@@ -1,7 +1,7 @@
 import { Database } from 'better-sqlite3';
-import { UserRepository } from '../../Domains/users/repository';
+import { UserRepository } from '@Domains/users/repository';
+import { CreatedUser } from '@Domains/users/entities';
 import { database } from '../sqlite';
-import { CreatedUser } from '../../Domains/users/entities';
 
 class UserRepositorySQLite implements UserRepository {
   private database: Database;
