@@ -12,7 +12,7 @@ export const routes: ServerRoute[] = [
     path: '/{param*}',
     handler: {
       directory: {
-        path: resolve(__dirname, '../../Interfaces/http/public'),
+        path: resolve(__dirname, '../../../Interfaces/http/public'),
       },
     },
   },
