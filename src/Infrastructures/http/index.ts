@@ -1,125 +1,22 @@
-import Hapi, { Request, ResponseToolkit } from '@hapi/hapi';
-import Inert from '@hapi/inert';
+import Hapi from '@hapi/hapi';
 import { Container } from 'instances-container';
-import Jwt from '@hapi/jwt';
-import { resolve } from 'path';
-import config from '../../Commons/config';
-import users from '../../Interfaces/http/api/v1/users';
-import ClientError from '../../Commons/exceptions/ClientError';
-import stories from '../../Interfaces/http/api/v1/stories';
-import secureResponse from './secureResponse';
-import homeV1 from '../../Interfaces/http/api/v1/home';
+import { preResponseMiddleware } from './utils';
+import { registerExternalPlugins, registerInternalPlugins } from './plugins';
+import { options } from './config';
+import { configureJwtAuth } from './auth';
+import { routes } from './routes';
 
 export const createServer = async (container: Container) => {
-  const server = Hapi.server({
-    host: config.app.host,
-    port: config.app.port,
-    routes: {
-      cors: true,
-    },
-  });
+  const server = Hapi.server(options);
 
-  await server.register([
-    {
-      plugin: Jwt.plugin,
-    },
-    {
-      plugin: Inert,
-    },
-  ]);
+  await registerExternalPlugins(server);
+  await configureJwtAuth(server);
+  await registerInternalPlugins(server, { container });
 
-  server.auth.strategy('story_jwt', 'jwt', {
-    keys: config.tokenize.secret,
-    verify: {
-      aud: false,
-      iss: false,
-      sub: false,
-      maxAgeSec: config.tokenize.age,
-    },
-    validate: (artifacts: any) => ({
-      isValid: true,
-      credentials: {
-        userId: artifacts.decoded.payload.userId,
-      },
-    }),
-  });
+  // interpreting the response
+  server.ext('onPreResponse', preResponseMiddleware);
 
   /* initial route */
-  server.route([
-    {
-      method: 'GET',
-      path: '/',
-      handler: () => ({ message: 'Hello World!' }),
-    },
-    {
-      method: 'GET',
-      path: '/{param*}',
-      handler: {
-        directory: {
-          path: resolve(__dirname, '../../Interfaces/http/public'),
-        },
-      },
-    },
-  ]);
-
-  /* v1 */
-  await server.register([
-    {
-      plugin: users,
-      options: { container },
-      routes: {
-        prefix: '/v1',
-      },
-    },
-    {
-      plugin: stories,
-      options: { container },
-      routes: {
-        prefix: '/v1',
-      },
-    },
-    {
-      plugin: homeV1,
-      routes: {
-        prefix: '/v1',
-      },
-    },
-  ]);
-
-  server.ext('onPreResponse', (request: Request, h: ResponseToolkit) => {
-    const { response } = request;
-
-    if (response instanceof Error) {
-      if (response instanceof ClientError) {
-        const newResponse = h.response({
-          error: true,
-          message: response.message,
-        });
-
-        newResponse.code(response.statusCode);
-        return secureResponse(newResponse);
-      }
-
-      if (!response.isServer) {
-        const newResponse = h.response({
-          status: 'fail',
-          message: response.output.payload.message,
-        });
-
-        newResponse.code(response.output.statusCode);
-        return secureResponse(newResponse);
-      }
-
-      const newResponse = h.response({
-        status: 'error',
-        message: 'terjadi kesalahan pada server kami',
-      });
-      newResponse.code(500);
-      return secureResponse(newResponse);
-    }
-
-    return secureResponse(response);
-  });
-
+  server.route(routes);
   return server;
 };
