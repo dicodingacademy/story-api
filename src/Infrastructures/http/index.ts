@@ -1,6 +1,8 @@
 import Hapi, { Request, ResponseToolkit } from '@hapi/hapi';
+import Inert from '@hapi/inert';
 import { Container } from 'instances-container';
 import Jwt from '@hapi/jwt';
+import { resolve } from 'path';
 import config from '../../Commons/config';
 import users from '../../Interfaces/http/api/v1/users';
 import ClientError from '../../Commons/exceptions/ClientError';
@@ -17,15 +19,12 @@ export const createServer = async (container: Container) => {
     },
   });
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: () => ({ message: 'Hello, world!' }),
-  });
-
   await server.register([
     {
       plugin: Jwt.plugin,
+    },
+    {
+      plugin: Inert,
     },
   ]);
 
@@ -44,6 +43,24 @@ export const createServer = async (container: Container) => {
       },
     }),
   });
+
+  /* initial route */
+  server.route([
+    {
+      method: 'GET',
+      path: '/',
+      handler: () => ({ message: 'Hello World!' }),
+    },
+    {
+      method: 'GET',
+      path: '/{param*}',
+      handler: {
+        directory: {
+          path: resolve(__dirname, '../../Interfaces/http/public'),
+        },
+      },
+    },
+  ]);
 
   /* v1 */
   await server.register([
