@@ -101,7 +101,13 @@ export const createServer = async (container: Container) => {
       }
 
       if (!response.isServer) {
-        return response;
+        const newResponse = h.response({
+          status: 'fail',
+          message: response.output.payload.message,
+        });
+
+        newResponse.code(response.output.statusCode);
+        return secureResponse(newResponse);
       }
 
       const newResponse = h.response({
