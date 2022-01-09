@@ -4,7 +4,7 @@ import { CreatedStory } from '@Domains/stories/entities';
 import { StoryRepository } from '@Domains/stories/repository';
 import { StoryStorage } from '@Domains/stories/storage';
 import { getLastPathInUrl } from '@Applications/utils';
-import { ApplicationUseCase, UseCaseDependencies } from '../base';
+import { ApplicationUseCase, UseCaseDependencies } from '@Applications/usecase/base';
 
 type UseCasePayload = {
   createdStory: CreatedStory
