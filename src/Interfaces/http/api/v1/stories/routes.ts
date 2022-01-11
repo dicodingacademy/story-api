@@ -14,7 +14,7 @@ const routes = (handler: StoriesHandler): ServerRoute[] => [
           output: 'stream',
         },
         parse: true,
-        maxBytes: 500000,
+        maxBytes: 1000000,
       },
     },
   },
