@@ -32,12 +32,12 @@ class StoriesRouteValidator {
         lat: Joi.number().error(new InvariantError('lat should be number')),
         lon: Joi.number().error(new InvariantError('lon should be number')),
         photo: Joi.any().required().error(new InvariantError('photo is required')),
-      }).error(new InvariantError('Invalid schema')),
+      }),
     };
   }
 
   validatePostStory(payload: any): PostStoryPayload {
-    const validationResult = this.schemas.postStory.validate(payload);
+    const validationResult = this.schemas.postStory.validate(payload || {});
 
     if (validationResult.error) {
       throw validationResult.error;
