@@ -1,19 +1,20 @@
 /* istanbul ignore file */
+
 import { createContainer, ParameterOption } from 'instances-container';
-import UserRepositorySQLite from './repositories/UserRepositorySQLite';
-import Base64PasswordHash from './security/Base64PasswordHash';
-import BcryptPasswordHash from './security/BcryptPasswordHash';
-import ApplicationEventImpl from './event/ApplicationEventImpl';
-import NanoIdGenerator from './utils/NanoIdGenerator';
-import UserCreationUseCase from '../Applications/usecase/users/UserCreationUseCase';
-import JwtTokenize from './tokenize/JwtTokenize';
-import LoginUseCase from '../Applications/usecase/authentications/LoginUseCase';
-import LocalStoryStorage from './storage/LocalStoryStorage';
-import StoryCreationUseCase from '../Applications/usecase/stories/StoryCreationUseCase';
-import StoryRepositorySQLite from './repositories/StoryRepositorySQLite';
-import GetAllStoriesUseCase from '../Applications/usecase/stories/GetAllStoriesUseCase';
-import ScheduledDeleteStoryUseCase from '../Applications/usecase/stories/ScheduledDeleteStoryUseCase';
-import ResetStoryUseCase from '../Applications/usecase/stories/ResetStoryUseCase';
+import StoryCreationUseCase from '@Applications/usecase/stories/StoryCreationUseCase';
+import BcryptPasswordHash from '@Infrastructures/security/BcryptPasswordHash';
+import LocalStoryStorage from '@Infrastructures/storage/LocalStoryStorage';
+import LoginUseCase from '@Applications/usecase/authentications/LoginUseCase';
+import ResetStoryUseCase from '@Applications/usecase/stories/ResetStoryUseCase';
+import NanoIdGenerator from '@Infrastructures/utils/NanoIdGenerator';
+import Base64PasswordHash from '@Infrastructures/security/Base64PasswordHash';
+import JwtTokenize from '@Infrastructures/tokenize/JwtTokenize';
+import GetAllStoriesUseCase from '@Applications/usecase/stories/GetAllStoriesUseCase';
+import StoryRepositorySQLite from '@Infrastructures/repositories/StoryRepositorySQLite';
+import ApplicationEventImpl from '@Infrastructures/event/ApplicationEventImpl';
+import UserRepositorySQLite from '@Infrastructures/repositories/UserRepositorySQLite';
+import UserCreationUseCase from '@Applications/usecase/users/UserCreationUseCase';
+import ScheduledDeleteStoryUseCase from '@Applications/usecase/stories/ScheduledDeleteStoryUseCase';
 
 const container = createContainer();
 

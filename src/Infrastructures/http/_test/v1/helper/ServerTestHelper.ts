@@ -1,6 +1,7 @@
 /* istanbul ignore file */
-import { createServer } from '../../../index';
-import container from '../../../../container';
+
+import { createServer } from '@Infrastructures/http';
+import container from '@Infrastructures/container';
 
 const ServerTestHelper = {
   async registerUser({ email = 'dimas@dicoding.com', password = '123456', name = 'Dimas' }: any = {}) {

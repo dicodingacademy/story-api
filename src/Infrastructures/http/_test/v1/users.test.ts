@@ -1,11 +1,11 @@
 import { Server } from '@hapi/hapi';
-import UsersTableTestHelper from '../../../repositories/_test/helper/UsersTableTestHelper';
-import { createServer } from '../../index';
-import container from '../../../container';
-import { applicationEventSubscriber } from '../../../../Interfaces/event';
-import { ApplicationEvent } from '../../../../Applications/usecase/base';
-import UserCreationUseCase from '../../../../Applications/usecase/users/UserCreationUseCase';
-import ServerTestHelper from './helper/ServerTestHelper';
+import { applicationEventSubscriber } from '@Interfaces/event';
+import { ApplicationEvent } from '@Applications/usecase/base';
+import UserCreationUseCase from '@Applications/usecase/users/UserCreationUseCase';
+import UsersTableTestHelper from '@Infrastructures/repositories/_test/helper/UsersTableTestHelper';
+import container from '@Infrastructures/container';
+import { createServer } from '@Infrastructures/http';
+import ServerTestHelper from '@Infrastructures/http/_test/v1/helper/ServerTestHelper';
 
 describe('users feature', () => {
   let server: Server;

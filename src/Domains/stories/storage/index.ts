@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { StoryPhoto } from '../entities';
+
+import { StoryPhoto } from '@Domains/stories/entities';
 
 export interface StoryStorage {
   saveStoryImage(storyPhoto: StoryPhoto): Promise<string>;

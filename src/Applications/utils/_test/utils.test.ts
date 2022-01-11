@@ -1,4 +1,4 @@
-import { getLastPathInUrl } from '../index';
+import { getLastPathInUrl } from '@Applications/utils';
 
 describe('utils', () => {
   describe('getLastPathInUrl', () => {

@@ -1,6 +1,6 @@
-import { CreatedStory, StoryCreation } from '../entities';
-import { StoryStorage } from '../storage';
-import { IdGenerator } from '../../commons/utils';
+import { StoryStorage } from '@Domains/stories/storage';
+import { IdGenerator } from '@Domains/commons/utils';
+import { CreatedStory, StoryCreation } from '@Domains/stories/entities';
 
 class StoryCreationAggregate {
   private storyStorage: StoryStorage;

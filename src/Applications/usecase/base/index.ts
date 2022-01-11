@@ -1,10 +1,10 @@
 /* eslint-disable no-use-before-define,no-unused-vars */
-import { UserRepository } from '../../../Domains/users/repository';
-import { IdGenerator } from '../../../Domains/commons/utils';
-import { PasswordHash } from '../../../Domains/users/security';
-import { Tokenize } from '../../../Domains/authentications/tokenize';
-import { StoryStorage } from '../../../Domains/stories/storage';
-import { StoryRepository } from '../../../Domains/stories/repository';
+import { UserRepository } from '@Domains/users/repository';
+import { IdGenerator } from '@Domains/commons/utils';
+import { PasswordHash } from '@Domains/users/security';
+import { Tokenize } from '@Domains/authentications/tokenize';
+import { StoryStorage } from '@Domains/stories/storage';
+import { StoryRepository } from '@Domains/stories/repository';
 
 export abstract class ApplicationUseCase<Input, Output> {
   protected applicationEvent: ApplicationEvent;

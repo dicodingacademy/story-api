@@ -1,8 +1,8 @@
-import { ApplicationUseCase, UseCaseDependencies } from '../base';
-import { Story } from '../../../Domains/stories/entities';
-import { StoryRepository } from '../../../Domains/stories/repository';
-import { UserRepository } from '../../../Domains/users/repository';
-import AuthenticationError from '../../../Commons/exceptions/AuthenticationError';
+import { Story } from '@Domains/stories/entities';
+import { StoryRepository } from '@Domains/stories/repository';
+import { UserRepository } from '@Domains/users/repository';
+import AuthenticationError from '@Commons/exceptions/AuthenticationError';
+import { ApplicationUseCase, UseCaseDependencies } from '@Applications/usecase/base';
 
 type UseCasePayload = {
   userId: string;

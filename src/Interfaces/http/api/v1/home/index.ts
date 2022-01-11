@@ -1,5 +1,5 @@
 import { Server } from '@hapi/hapi';
-import routes from './routes';
+import routes from '@Interfaces/http/api/v1/home/routes';
 
 const homeV1 = {
   name: 'homeV1',

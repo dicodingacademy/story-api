@@ -1,6 +1,6 @@
 import { Server } from '@hapi/hapi';
 import Jwt from '@hapi/jwt';
-import config from '../../../Commons/config';
+import config from '@Commons/config';
 
 export const configureJwtAuth = async (server: Server) => {
   // stories jwt auth

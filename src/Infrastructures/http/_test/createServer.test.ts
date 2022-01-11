@@ -1,6 +1,6 @@
 import { Server } from '@hapi/hapi';
-import { createServer } from '../index';
-import container from '../../container';
+import { createServer } from '@Infrastructures/http';
+import container from '@Infrastructures/container';
 
 describe('createServer', () => {
   let server: Server;

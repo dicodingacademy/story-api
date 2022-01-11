@@ -1,9 +1,9 @@
 /* istanbul ignore file */
 import * as fs from 'fs';
 import { resolve } from 'path';
-import { StoryStorage } from '../../Domains/stories/storage';
-import { StoryPhoto } from '../../Domains/stories/entities';
-import config from '../../Commons/config';
+import { StoryPhoto } from '@Domains/stories/entities';
+import { StoryStorage } from '@Domains/stories/storage';
+import config from '@Commons/config';
 
 class LocalStoryStorage implements StoryStorage {
   private readonly folder: string;

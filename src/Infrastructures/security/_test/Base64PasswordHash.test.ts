@@ -1,4 +1,4 @@
-import Base64PasswordHash from '../Base64PasswordHash';
+import Base64PasswordHash from '@Infrastructures/security/Base64PasswordHash';
 
 describe('BcryptPasswordHash', () => {
   const passwordHash = new Base64PasswordHash();

@@ -1,5 +1,5 @@
 import * as events from 'events';
-import { ApplicationEvent, ApplicationUseCase } from '../../Applications/usecase/base';
+import { ApplicationEvent, ApplicationUseCase } from '@Applications/usecase/base';
 
 class ApplicationEventImpl extends events.EventEmitter implements ApplicationEvent {
   async raise(useCase: ApplicationUseCase<any, any>, data?: any): Promise<void> {

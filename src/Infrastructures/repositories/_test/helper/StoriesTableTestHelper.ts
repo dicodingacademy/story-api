@@ -1,5 +1,6 @@
 /* istanbul ignore file */
-import { database } from '../../../sqlite';
+
+import { database } from '@Infrastructures/sqlite';
 
 const StoriesTableTestHelper = {
   async cleanTable(): Promise<void> {

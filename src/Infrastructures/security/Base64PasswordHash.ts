@@ -1,6 +1,6 @@
-import { PasswordHash } from '../../Domains/users/security';
-
 // this is for test only
+import { PasswordHash } from '@Domains/users/security';
+
 class Base64PasswordHash implements PasswordHash {
   async compare(plain: string, hashed: string): Promise<boolean> {
     const decoded = Buffer.from(hashed, 'base64').toString('utf8');

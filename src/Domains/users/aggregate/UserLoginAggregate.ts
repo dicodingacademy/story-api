@@ -1,7 +1,7 @@
-import { UserRepository } from '../repository';
-import { UserLogin } from '../entities';
-import AuthenticationError from '../../../Commons/exceptions/AuthenticationError';
-import { PasswordHash } from '../security';
+import { UserRepository } from '@Domains/users/repository';
+import { PasswordHash } from '@Domains/users/security';
+import { UserLogin } from '@Domains/users/entities';
+import AuthenticationError from '@Commons/exceptions/AuthenticationError';
 
 class UserLoginAggregate {
   private userRepository: UserRepository;

@@ -1,9 +1,9 @@
-import { ApplicationUseCase, UseCaseDependencies } from '../base';
-import { UserRepository } from '../../../Domains/users/repository';
-import { PasswordHash } from '../../../Domains/users/security';
-import { IdGenerator } from '../../../Domains/commons/utils';
-import { UserCreation } from '../../../Domains/users/entities';
-import UserCreationAggregate from '../../../Domains/users/aggregate/UserCreationAggregate';
+import { UserRepository } from '@Domains/users/repository';
+import { PasswordHash } from '@Domains/users/security';
+import { IdGenerator } from '@Domains/commons/utils';
+import { UserCreation } from '@Domains/users/entities';
+import UserCreationAggregate from '@Domains/users/aggregate/UserCreationAggregate';
+import { ApplicationUseCase, UseCaseDependencies } from '@Applications/usecase/base';
 
 class UserCreationUseCase extends ApplicationUseCase<UserCreation, void> {
   private readonly userRepository: UserRepository;

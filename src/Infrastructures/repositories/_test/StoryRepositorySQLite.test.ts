@@ -1,7 +1,8 @@
-import StoryRepositorySQLite from '../StoryRepositorySQLite';
-import { CreatedStory } from '../../../Domains/stories/entities';
-import UsersTableTestHelper from './helper/UsersTableTestHelper';
-import StoriesTableTestHelper from './helper/StoriesTableTestHelper';
+import StoryRepositorySQLite from '@Infrastructures/repositories/StoryRepositorySQLite';
+import StoriesTableTestHelper
+  from '@Infrastructures/repositories/_test/helper/StoriesTableTestHelper';
+import UsersTableTestHelper from '@Infrastructures/repositories/_test/helper/UsersTableTestHelper';
+import { CreatedStory } from '@Domains/stories/entities';
 
 describe('StoryRepositorySQLite', () => {
   const storyRepository = new StoryRepositorySQLite();

@@ -1,5 +1,5 @@
 import { ServerRoute } from '@hapi/hapi';
-import StoriesHandler from './handler';
+import StoriesHandler from '@Interfaces/http/api/v1/stories/handler';
 
 const routes = (handler: StoriesHandler): ServerRoute[] => [
   {

@@ -3,11 +3,12 @@ import FormData from 'form-data';
 import * as fs from 'fs';
 import { resolve } from 'path';
 import streamToPromise from 'stream-to-promise';
-import { createServer } from '../../index';
-import container from '../../../container';
-import ServerTestHelper from './helper/ServerTestHelper';
-import UsersTableTestHelper from '../../../repositories/_test/helper/UsersTableTestHelper';
-import StoriesTableTestHelper from '../../../repositories/_test/helper/StoriesTableTestHelper';
+import { createServer } from '@Infrastructures/http';
+import container from '@Infrastructures/container';
+import StoriesTableTestHelper
+  from '@Infrastructures/repositories/_test/helper/StoriesTableTestHelper';
+import UsersTableTestHelper from '@Infrastructures/repositories/_test/helper/UsersTableTestHelper';
+import ServerTestHelper from '@Infrastructures/http/_test/v1/helper/ServerTestHelper';
 
 describe('stories', () => {
   let server: Server;

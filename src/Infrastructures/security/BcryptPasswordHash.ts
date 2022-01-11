@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { hash, compare } from 'bcrypt';
-import { PasswordHash } from '../../Domains/users/security';
+import { PasswordHash } from '@Domains/users/security';
 
 class BcryptPasswordHash implements PasswordHash {
   async hash(password: string): Promise<string> {

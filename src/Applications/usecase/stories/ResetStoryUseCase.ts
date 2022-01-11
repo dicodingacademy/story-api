@@ -1,9 +1,10 @@
 /* istanbul ignore file */
+
+import { StoryRepository } from '@Domains/stories/repository';
+import { Story } from '@Domains/stories/entities';
+import { StoryStorage } from '@Domains/stories/storage';
+import { getLastPathInUrl } from '@Applications/utils';
 import { ApplicationUseCase, UseCaseDependencies } from '../base';
-import { StoryRepository } from '../../../Domains/stories/repository';
-import { Story } from '../../../Domains/stories/entities';
-import { StoryStorage } from '../../../Domains/stories/storage';
-import { getLastPathInUrl } from '../../utils';
 
 class ResetStoryUseCase extends ApplicationUseCase<void, void> {
   private storyRepository: StoryRepository;

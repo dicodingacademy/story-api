@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import Joi, { ObjectSchema } from 'joi';
 import { Readable } from 'stream';
-import InvariantError from '../../../../../Commons/exceptions/InvariantError';
+import InvariantError from '@Commons/exceptions/InvariantError';
 
 type StoriesRouteSchema = {
   postStory: ObjectSchema,

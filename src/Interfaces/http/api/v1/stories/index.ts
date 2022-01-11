@@ -1,8 +1,8 @@
 import { Server } from '@hapi/hapi';
 import { Container } from 'instances-container';
-import StoriesRouteValidator from './validator';
-import StoriesHandler from './handler';
-import routes from './routes';
+import StoriesRouteValidator from '@Interfaces/http/api/v1/stories/validator';
+import StoriesHandler from '@Interfaces/http/api/v1/stories/handler';
+import routes from '@Interfaces/http/api/v1/stories/routes';
 
 const stories = {
   name: 'stories',
