@@ -86,6 +86,27 @@ class StoryRepositorySQLite implements StoryRepository {
     const row = statement.get(id);
     return !!row;
   }
+
+  async getStoriesWithPaging(page: number = 1, size: number = 10): Promise<Story[]> {
+    const statement = this.db.prepare(`
+        SELECT stories.id, users.name, stories.description, stories.created_at, stories.photo_url, stories.lat, stories.lon 
+        FROM stories
+        LEFT JOIN users ON stories.user_id = users.id
+        ORDER BY stories.created_at DESC
+        LIMIT ? OFFSET ?`);
+
+    const rows = statement.all(size, (page - 1) * size);
+
+    return rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      description: row.description,
+      photoUrl: row.photo_url,
+      createdAt: row.created_at,
+      lat: row.lat,
+      lon: row.lon,
+    }));
+  }
 }
 
 export default StoryRepositorySQLite;

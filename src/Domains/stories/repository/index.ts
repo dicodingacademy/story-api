@@ -9,4 +9,5 @@ export interface StoryRepository {
   deleteAllStoriesExpectFromDicoding() : Promise<void>;
   getAllStoriesExpectFromDicoding() : Promise<Story[]>;
   isStoryOwnedByDicodingAdmin(id: string) : Promise<boolean>;
+  getStoriesWithPaging(page?: number, size?: number) : Promise<Story[]>;
 }
