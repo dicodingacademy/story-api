@@ -6,6 +6,8 @@ import { ApplicationUseCase, UseCaseDependencies } from '@Applications/usecase/b
 
 type UseCasePayload = {
   userId: string;
+  page: number;
+  size: number;
 }
 
 class GetAllStoriesUseCase extends ApplicationUseCase<UseCasePayload, Story[]> {
@@ -20,14 +22,14 @@ class GetAllStoriesUseCase extends ApplicationUseCase<UseCasePayload, Story[]> {
     this.userRepository = userRepository;
   }
 
-  protected async run({ userId }: UseCasePayload): Promise<Story[]> {
+  protected async run({ userId, page, size }: UseCasePayload): Promise<Story[]> {
     const user = await this.userRepository.findById(userId);
 
     if (!user) {
       throw new AuthenticationError('User not found');
     }
 
-    return this.storyRepository.getAllStories();
+    return this.storyRepository.getStoriesWithPaging(page, size);
   }
 }
 
