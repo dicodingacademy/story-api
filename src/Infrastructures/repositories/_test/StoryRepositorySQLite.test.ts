@@ -200,4 +200,52 @@ describe('StoryRepositorySQLite', () => {
       expect(isStoryOwnedByDicodingAdmin).toBeTruthy();
     });
   });
+
+  describe('getStoriesWithPaging', () => {
+    const populateData = async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-643', name: 'dimas', email: 'dimas@dicoding.com' });
+
+      // Add 20 stories
+      for (let i = 0; i < 20; i += 1) {
+        const id = `story-${i}`;
+        const userId = 'user-643';
+        const description = `description-${i}`;
+        const photoUrl = `https://photo.com-${i}`;
+        const lat = -6.2 + i;
+        const lon = 106.1 + i;
+
+        // eslint-disable-next-line no-await-in-loop
+        await StoriesTableTestHelper.addStory({
+          id,
+          userId,
+          description,
+          photoUrl,
+          lat,
+          lon,
+        });
+      }
+    };
+
+    it('should return 10 items if not given page and size parameter', async () => {
+      await populateData();
+      const stories = await storyRepository.getStoriesWithPaging();
+
+      expect(stories.length).toBe(10);
+      expect(stories[0].id).toBe('story-19');
+    });
+
+    it('should return 5 items when given size value by 5', async () => {
+      await populateData();
+      const stories = await storyRepository.getStoriesWithPaging(undefined, 5);
+
+      expect(stories.length).toBe(5);
+    });
+
+    it('should return 5 items and next page if given size by 5 and page by 2', async () => {
+      await populateData();
+      const stories = await storyRepository.getStoriesWithPaging(2, 5);
+
+      expect(stories.length).toBe(5);
+    });
+  });
 });
