@@ -38,6 +38,7 @@
     "joi": "^17.5.0",
     "nanoid": "^3.1.30",
     "node-cron": "^3.0.0",
+    "simple-node-logger": "^21.8.12",
     "stream-to-promise": "^3.0.0",
     "string-strip-html": "^8.3.0"
   },

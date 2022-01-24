@@ -1,5 +1,7 @@
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 import ClientError from '@Commons/exceptions/ClientError';
+import container from '@Infrastructures/container';
+import { Logger } from '@Applications/log';
 
 export const secureResponse = (response: ResponseObject) => {
   response.header('Content-Security-Policy', 'upgrade-insecure-requests');
@@ -10,8 +12,9 @@ export const secureResponse = (response: ResponseObject) => {
   return response;
 };
 
-export const preResponseMiddleware = (request: Request, h: ResponseToolkit) => {
+export const preResponseMiddleware = async (request: Request, h: ResponseToolkit) => {
   const { response } = request;
+  const logger = container.getInstance('Logger') as Logger;
 
   if (response instanceof Error) {
     if (response instanceof ClientError) {
@@ -21,6 +24,7 @@ export const preResponseMiddleware = (request: Request, h: ResponseToolkit) => {
       });
 
       newResponse.code(response.statusCode);
+      await logger.writeClientError(response);
       return secureResponse(newResponse);
     }
 
@@ -31,6 +35,7 @@ export const preResponseMiddleware = (request: Request, h: ResponseToolkit) => {
       });
 
       newResponse.code(response.output.statusCode);
+      await logger.writeClientError(response);
       return secureResponse(newResponse);
     }
 
@@ -39,6 +44,7 @@ export const preResponseMiddleware = (request: Request, h: ResponseToolkit) => {
       message: 'terjadi kesalahan pada server kami',
     });
     newResponse.code(500);
+    await logger.writeError(response);
     return secureResponse(newResponse);
   }
 

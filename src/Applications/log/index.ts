@@ -6,7 +6,7 @@ export type Event = {
 }
 
 export interface Logger {
-  writeError(error: Error): void;
-  writeClientError(error: Error): void;
-  writeEvent(event: Event): void;
+  writeError(error: Error): Promise<void>;
+  writeClientError(error: Error): Promise<void>;
+  writeEvent(event: Event): Promise<void>;
 }

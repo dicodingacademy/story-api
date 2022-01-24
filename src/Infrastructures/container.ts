@@ -15,6 +15,7 @@ import ApplicationEventImpl from '@Infrastructures/event/ApplicationEventImpl';
 import UserRepositorySQLite from '@Infrastructures/repositories/UserRepositorySQLite';
 import UserCreationUseCase from '@Applications/usecase/users/UserCreationUseCase';
 import ScheduledDeleteStoryUseCase from '@Applications/usecase/stories/ScheduledDeleteStoryUseCase';
+import FileLogger from '@Infrastructures/logging/local/FileLogger';
 
 const container = createContainer();
 
@@ -82,6 +83,14 @@ container.register([
   {
     key: 'StoryStorage',
     Class: LocalStoryStorage,
+  },
+]);
+
+/** logging */
+container.register([
+  {
+    key: 'Logger',
+    Class: FileLogger,
   },
 ]);
 
