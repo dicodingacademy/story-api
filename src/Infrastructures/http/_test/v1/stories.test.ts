@@ -176,7 +176,24 @@ describe('stories', () => {
     });
 
     it('should response 201 success', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-guest', email: 'guest@dicoding.com' });
+      const formData = new FormData();
+      const file = fs.createReadStream(resolve(__dirname, './fixture/sample-image.png'));
 
+      formData.append('description', 'lorem ipsum');
+      formData.append('photo', file);
+
+      const payload = await streamToPromise(formData);
+
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/stories/guest',
+        headers: {
+          ...formData.getHeaders(),
+        },
+        payload,
+      });
+      expect(response.statusCode).toBe(201);
     });
   });
 });
