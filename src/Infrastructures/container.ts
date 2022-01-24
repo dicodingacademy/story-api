@@ -16,6 +16,7 @@ import UserRepositorySQLite from '@Infrastructures/repositories/UserRepositorySQ
 import UserCreationUseCase from '@Applications/usecase/users/UserCreationUseCase';
 import ScheduledDeleteStoryUseCase from '@Applications/usecase/stories/ScheduledDeleteStoryUseCase';
 import FileLogger from '@Infrastructures/logging/local/FileLogger';
+import GuestStoryCreationUseCase from '@Applications/usecase/stories/GuestStoryCreationUseCase';
 
 const container = createContainer();
 
@@ -118,6 +119,10 @@ container.register([
   },
   {
     Class: ResetStoryUseCase,
+    parameter: useCaseParameter,
+  },
+  {
+    Class: GuestStoryCreationUseCase,
     parameter: useCaseParameter,
   },
 ]);

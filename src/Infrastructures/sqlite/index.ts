@@ -18,6 +18,11 @@ const migrateTable = (database: Database) => {
       lat REAL,
       lon REAL,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE);
+
+  INSERT INTO users (id, name, email, hashed_password)
+  SELECT * FROM (SELECT 'user-guest', 'Guest', 'guest@dicoding.com', '$2b$10$2pf') AS tmp
+  WHERE NOT EXISTS (SELECT id FROM users WHERE id = 'user-guest')
+  LIMIT 1;
   `;
 
   database.exec(query);

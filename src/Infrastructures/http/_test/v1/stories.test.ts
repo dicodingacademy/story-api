@@ -155,4 +155,45 @@ describe('stories', () => {
       expect(payload.listStory.length).toBe(2);
     });
   });
+
+  describe('when POST /v1/stories/guest', () => {
+    it('should response 401 when invalid payload', async () => {
+      const formData = new FormData();
+      formData.append('title', 'title');
+
+      const payload = await streamToPromise(formData);
+
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/stories/guest',
+        headers: {
+          ...formData.getHeaders(),
+        },
+        payload,
+      });
+
+      expect(response.statusCode).toBe(400);
+    });
+
+    it('should response 201 success', async () => {
+      await UsersTableTestHelper.addUser({ id: 'user-guest', email: 'guest@dicoding.com' });
+      const formData = new FormData();
+      const file = fs.createReadStream(resolve(__dirname, './fixture/sample-image.png'));
+
+      formData.append('description', 'lorem ipsum');
+      formData.append('photo', file);
+
+      const payload = await streamToPromise(formData);
+
+      const response = await server.inject({
+        method: 'POST',
+        url: '/v1/stories/guest',
+        headers: {
+          ...formData.getHeaders(),
+        },
+        payload,
+      });
+      expect(response.statusCode).toBe(201);
+    });
+  });
 });

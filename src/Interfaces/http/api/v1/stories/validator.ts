@@ -37,7 +37,7 @@ class StoriesRouteValidator {
   }
 
   validatePostStory(payload: any): PostStoryPayload {
-    const validationResult = this.schemas.postStory.validate(payload || {});
+    const validationResult = this.schemas.postStory.validate(payload);
 
     if (validationResult.error) {
       throw validationResult.error;

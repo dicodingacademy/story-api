@@ -19,6 +19,21 @@ const routes = (handler: StoriesHandler): ServerRoute[] => [
     },
   },
   {
+    method: 'POST',
+    path: '/stories/guest',
+    handler: handler.postGuestStoryHandler,
+    options: {
+      payload: {
+        allow: 'multipart/form-data',
+        multipart: {
+          output: 'stream',
+        },
+        parse: true,
+        maxBytes: 1000000,
+      },
+    },
+  },
+  {
     method: 'GET',
     path: '/stories',
     handler: handler.getStoriesHandler,
