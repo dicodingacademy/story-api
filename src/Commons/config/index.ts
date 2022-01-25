@@ -23,6 +23,7 @@ const config = {
   },
   story: {
     deleteTimeInHours: process.env.STORY_DELETE_TIME_IN_HOURS,
+    guestDeleteTimeInHours: process.env.STORY_GUEST_DELETE_TIME_IN_HOURS,
   },
 };
 
