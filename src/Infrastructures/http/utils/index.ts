@@ -30,7 +30,7 @@ export const preResponseMiddleware = async (request: Request, h: ResponseToolkit
 
     if (!response.isServer) {
       const newResponse = h.response({
-        status: 'fail',
+        error: true,
         message: response.output.payload.message,
       });
 
@@ -40,7 +40,7 @@ export const preResponseMiddleware = async (request: Request, h: ResponseToolkit
     }
 
     const newResponse = h.response({
-      status: 'error',
+      error: true,
       message: 'terjadi kesalahan pada server kami',
     });
     newResponse.code(500);
