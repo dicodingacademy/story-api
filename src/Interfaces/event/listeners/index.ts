@@ -16,3 +16,15 @@ export const schedulingStoryToDelete = ({ output }: { output: CreatedStory }) =>
     await useCase.execute({ createdStory: output });
   }, scheduleInMillis);
 };
+
+export const schedulingGuestStoryToDelete = ({ output } : { output: CreatedStory }) => {
+  const scheduleInMillis = hourToMillis(Number(config.story.deleteTimeInHours));
+  const useCase = container.getInstance(
+    ScheduledDeleteStoryUseCase.name,
+  ) as ScheduledDeleteStoryUseCase;
+  console.log(`Scheduling guest story to delete: ${output.id}`);
+
+  setTimeout(async () => {
+    await useCase.execute({ createdStory: output });
+  }, scheduleInMillis);
+};

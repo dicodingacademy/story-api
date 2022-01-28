@@ -1,11 +1,15 @@
 import container from '@Infrastructures/container';
 import StoryCreationUseCase from '@Applications/usecase/stories/StoryCreationUseCase';
 import { ApplicationEvent, ApplicationUseCase } from '@Applications/usecase/base';
-import { schedulingStoryToDelete } from '@Interfaces/event/listeners';
+import { schedulingGuestStoryToDelete, schedulingStoryToDelete } from '@Interfaces/event/listeners';
+import GuestStoryCreationUseCase from '@Applications/usecase/stories/GuestStoryCreationUseCase';
 
 const subscribers = {
   [StoryCreationUseCase.name]: [
     schedulingStoryToDelete,
+  ],
+  [GuestStoryCreationUseCase.name]: [
+    schedulingGuestStoryToDelete,
   ],
 };
 
