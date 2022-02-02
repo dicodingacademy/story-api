@@ -18,7 +18,7 @@ export const schedulingStoryToDelete = ({ output }: { output: CreatedStory }) =>
 };
 
 export const schedulingGuestStoryToDelete = ({ output } : { output: CreatedStory }) => {
-  const scheduleInMillis = hourToMillis(Number(config.story.deleteTimeInHours));
+  const scheduleInMillis = hourToMillis(Number(config.story.guestDeleteTimeInHours));
   const useCase = container.getInstance(
     ScheduledDeleteStoryUseCase.name,
   ) as ScheduledDeleteStoryUseCase;
