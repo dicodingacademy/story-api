@@ -18,14 +18,14 @@ class UsersRouteValidator {
   constructor() {
     this.schemas = {
       postUser: Joi.object({
-        name: Joi.string().required().error(new InvariantError('name is required')),
-        email: Joi.string().email().required().error(new InvariantError('email is required or wrong format')),
-        password: Joi.string().required().error(new InvariantError('password is required')),
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().required(),
       }),
 
       loginUser: Joi.object({
-        email: Joi.string().email().required().error(new InvariantError('email is required or wrong format')),
-        password: Joi.string().required().error(new InvariantError('password is required')),
+        email: Joi.string().email().required(),
+        password: Joi.string().required(),
       }),
     };
   }
@@ -33,7 +33,7 @@ class UsersRouteValidator {
   validatePostUser(payload: unknown) {
     const validationResult = this.schemas.postUser.validate(payload || {});
     if (validationResult.error) {
-      throw validationResult.error;
+      throw new InvariantError(validationResult.error.message);
     }
 
     return validationResult.value as PostUserPayload;
@@ -42,7 +42,7 @@ class UsersRouteValidator {
   validateLoginUser(payload: unknown) {
     const validationResult = this.schemas.loginUser.validate(payload || {});
     if (validationResult.error) {
-      throw validationResult.error;
+      throw new InvariantError(validationResult.error.message);
     }
 
     return validationResult.value as PostUserPayload;
