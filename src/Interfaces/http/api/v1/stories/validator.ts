@@ -28,10 +28,10 @@ class StoriesRouteValidator {
   constructor() {
     this.schemas = {
       postStory: Joi.object({
-        description: Joi.string().required().error(new InvariantError('description is required and should be string')),
-        lat: Joi.number().error(new InvariantError('lat should be number')),
-        lon: Joi.number().error(new InvariantError('lon should be number')),
-        photo: Joi.any().required().error(new InvariantError('photo is required')),
+        description: Joi.string().required(),
+        lat: Joi.number(),
+        lon: Joi.number(),
+        photo: Joi.any(),
       }),
     };
   }
@@ -40,7 +40,7 @@ class StoriesRouteValidator {
     const validationResult = this.schemas.postStory.validate(payload);
 
     if (validationResult.error) {
-      throw validationResult.error;
+      throw new InvariantError(validationResult.error.message);
     }
 
     const { photo } = payload;
