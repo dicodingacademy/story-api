@@ -24,6 +24,11 @@ export const preResponseMiddleware = async (request: Request, h: ResponseToolkit
       });
 
       newResponse.code(response.statusCode);
+
+      if (response.statusCode === 413) {
+        newResponse.message(response.message);
+      }
+
       await logger.writeClientError(response);
       return secureResponse(newResponse);
     }
