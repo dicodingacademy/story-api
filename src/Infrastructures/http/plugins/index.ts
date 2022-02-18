@@ -3,7 +3,6 @@ import { Server } from '@hapi/hapi';
 import { Container } from 'instances-container';
 import users from '@Interfaces/http/api/v1/users';
 import stories from '@Interfaces/http/api/v1/stories';
-import homeV1 from '@Interfaces/http/api/v1/home';
 
 const externalPlugins = () => [
   {
@@ -23,12 +22,6 @@ const internalPlugins = ({ container } : { container :Container}) => [
   {
     plugin: stories,
     options: { container },
-    routes: {
-      prefix: '/v1',
-    },
-  },
-  {
-    plugin: homeV1,
     routes: {
       prefix: '/v1',
     },
