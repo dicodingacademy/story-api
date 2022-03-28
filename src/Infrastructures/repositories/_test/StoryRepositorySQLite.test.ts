@@ -128,7 +128,7 @@ describe('StoryRepositorySQLite', () => {
         lon: 106.1,
       });
 
-      await storyRepository.deleteAllStoriesExpectFromDicoding();
+      await storyRepository.deleteAllStoriesExpectFromAdminAndReviewer();
 
       const stories = await StoriesTableTestHelper.findAll();
 
@@ -159,7 +159,7 @@ describe('StoryRepositorySQLite', () => {
         lon: 106.1,
       });
 
-      const stories = await storyRepository.getAllStoriesExpectFromDicoding();
+      const stories = await storyRepository.getAllStoriesExpectFromAdminAndReviewer();
 
       expect(stories.length).toBe(1);
     });

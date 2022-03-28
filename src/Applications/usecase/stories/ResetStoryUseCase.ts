@@ -21,7 +21,7 @@ class ResetStoryUseCase extends ApplicationUseCase<void, void> {
   }
 
   protected async run(): Promise<void> {
-    const storyToDelete = await this.storyRepository.getAllStoriesExpectFromDicoding();
+    const storyToDelete = await this.storyRepository.getAllStoriesExpectFromAdminAndReviewer();
     const promisesToRun = storyToDelete.map(this.deleteStory);
     await Promise.all(promisesToRun);
   }
