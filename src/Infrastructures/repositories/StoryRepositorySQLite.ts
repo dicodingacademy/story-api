@@ -45,20 +45,20 @@ class StoryRepositorySQLite implements StoryRepository {
     statement.run(id);
   }
 
-  async deleteAllStoriesExpectFromDicoding(): Promise<void> {
+  async deleteAllStoriesExpectFromAdminAndReviewer(): Promise<void> {
     const statement = this.db.prepare(`DELETE FROM stories WHERE user_id != (
-        SELECT id FROM users WHERE email = 'admin@dicoding.com'
+        SELECT id FROM users WHERE email = 'admin@dicoding.com' OR email = 'reviewer@reviewer.com'
     )`);
     statement.run();
   }
 
-  async getAllStoriesExpectFromDicoding(): Promise<Story[]> {
+  async getAllStoriesExpectFromAdminAndReviewer(): Promise<Story[]> {
     const statement = this.db.prepare(`
         SELECT stories.id, users.name, stories.description, stories.created_at, stories.photo_url, stories.lat, stories.lon 
         FROM stories
         LEFT JOIN users ON stories.user_id = users.id
         WHERE stories.user_id != (
-            SELECT id FROM users WHERE email = 'admin@dicoding.com'
+            SELECT id FROM users WHERE email = 'admin@dicoding.com' OR email = 'reviewer@reviewer.com'
         )`);
 
     const rows = statement.all();
