@@ -5,6 +5,7 @@ import StoryCreationUseCase from '@Applications/usecase/stories/StoryCreationUse
 import StoriesRouteValidator from '@Interfaces/http/api/v1/stories/validator';
 import GetAllStoriesUseCase from '@Applications/usecase/stories/GetAllStoriesUseCase';
 import GuestStoryCreationUseCase from '@Applications/usecase/stories/GuestStoryCreationUseCase';
+import { nanoid } from 'nanoid';
 
 type Credentials = {
   userId: string;
@@ -31,7 +32,7 @@ class StoriesHandler {
     const storyPhoto: StoryPhoto = {
       file: payload.photo,
       meta: {
-        filename: payload.photo.hapi.filename,
+        filename: `${nanoid(8)}.${payload.photo.hapi.filename.split('.').pop()}`,
         contentType: payload.photo.hapi.headers['content-type'],
       },
     };
@@ -71,7 +72,7 @@ class StoriesHandler {
     const storyPhoto: StoryPhoto = {
       file: payload.photo,
       meta: {
-        filename: payload.photo.hapi.filename,
+        filename: `${nanoid(8)}.${payload.photo.hapi.filename.split('.').pop()}`,
         contentType: payload.photo.hapi.headers['content-type'],
       },
     };
