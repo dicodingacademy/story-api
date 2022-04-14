@@ -13,7 +13,11 @@ export const schedulingStoryToDelete = ({ output }: { output: CreatedStory }) =>
   console.log(`Scheduling story to delete: ${output.id}`);
 
   setTimeout(async () => {
-    await useCase.execute({ createdStory: output });
+    try {
+      await useCase.execute({ createdStory: output });
+    } catch (error) {
+      console.log(`failed delete scheduled story: ${output.id}`);
+    }
   }, scheduleInMillis);
 };
 
@@ -25,6 +29,10 @@ export const schedulingGuestStoryToDelete = ({ output } : { output: CreatedStory
   console.log(`Scheduling guest story to delete: ${output.id}`);
 
   setTimeout(async () => {
-    await useCase.execute({ createdStory: output });
+    try {
+      await useCase.execute({ createdStory: output });
+    } catch (error) {
+      console.log(`failed delete scheduled story: ${output.id}`);
+    }
   }, scheduleInMillis);
 };
