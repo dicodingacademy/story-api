@@ -41,6 +41,11 @@ const routes = (handler: StoriesHandler): ServerRoute[] => [
       auth: 'story_jwt',
     },
   },
+  {
+    method: 'GET',
+    path: '/stories/reset',
+    handler: handler.resetStoriesHandler,
+  },
 ];
 
 export default routes;
