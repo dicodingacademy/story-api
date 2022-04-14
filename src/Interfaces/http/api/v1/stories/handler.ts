@@ -6,6 +6,7 @@ import StoriesRouteValidator from '@Interfaces/http/api/v1/stories/validator';
 import GetAllStoriesUseCase from '@Applications/usecase/stories/GetAllStoriesUseCase';
 import GuestStoryCreationUseCase from '@Applications/usecase/stories/GuestStoryCreationUseCase';
 import { nanoid } from 'nanoid';
+import ResetStoryUseCase from '@Applications/usecase/stories/ResetStoryUseCase';
 
 type Credentials = {
   userId: string;
@@ -23,6 +24,7 @@ class StoriesHandler {
     this.postStoryHandler = this.postStoryHandler.bind(this);
     this.getStoriesHandler = this.getStoriesHandler.bind(this);
     this.postGuestStoryHandler = this.postGuestStoryHandler.bind(this);
+    this.resetStoriesHandler = this.resetStoriesHandler.bind(this);
   }
 
   async postStoryHandler(request: Request, h: ResponseToolkit) {
@@ -91,6 +93,15 @@ class StoriesHandler {
     });
     response.code(201);
     return response;
+  }
+
+  async resetStoriesHandler() {
+    const useCase = this.container.getInstance(ResetStoryUseCase.name) as ResetStoryUseCase;
+    await useCase.execute();
+    return {
+      error: false,
+      message: 'Stories reset successfully',
+    };
   }
 }
 
