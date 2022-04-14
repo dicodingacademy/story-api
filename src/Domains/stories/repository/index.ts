@@ -9,5 +9,5 @@ export interface StoryRepository {
   deleteAllStoriesExpectFromAdminAndReviewer() : Promise<void>;
   getAllStoriesExpectFromAdminAndReviewer() : Promise<Story[]>;
   isStoryOwnedByDicodingAdmin(id: string) : Promise<boolean>;
-  getStoriesWithPaging(page?: number, size?: number) : Promise<Story[]>;
+  getStoriesWithPaging(page?: number, size?: number, isLocation?: boolean) : Promise<Story[]>;
 }

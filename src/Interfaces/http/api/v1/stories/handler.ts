@@ -57,9 +57,13 @@ class StoriesHandler {
 
   async getStoriesHandler(request: Request) {
     const { userId } = request.auth.credentials as Credentials;
+    const { location } = request.query;
+
     const useCase = this.container.getInstance(GetAllStoriesUseCase.name) as GetAllStoriesUseCase;
     const { page, size } = request.query as { page: number; size: number };
-    const stories = await useCase.execute({ userId, size, page });
+    const stories = await useCase.execute({
+      userId, size, page, isLocation: Boolean(Number(location)),
+    });
 
     return {
       error: false,

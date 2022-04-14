@@ -87,13 +87,28 @@ class StoryRepositorySQLite implements StoryRepository {
     return !!row;
   }
 
-  async getStoriesWithPaging(page: number = 1, size: number = 10): Promise<Story[]> {
-    const statement = this.db.prepare(`
+  async getStoriesWithPaging(
+    page: number = 1, size: number = 10, isLocation: boolean = false,
+  ): Promise<Story[]> {
+    let statement;
+
+    if (isLocation) {
+      statement = this.db.prepare(`
+        SELECT stories.id, users.name, stories.description, stories.created_at, stories.photo_url, stories.lat, stories.lon 
+        FROM stories
+        LEFT JOIN users ON stories.user_id = users.id
+        WHERE stories.lat IS NOT NULL
+        AND stories.lon IS NOT NULL
+        ORDER BY stories.created_at DESC
+        LIMIT ? OFFSET ?`);
+    } else {
+      statement = this.db.prepare(`
         SELECT stories.id, users.name, stories.description, stories.created_at, stories.photo_url, stories.lat, stories.lon 
         FROM stories
         LEFT JOIN users ON stories.user_id = users.id
         ORDER BY stories.created_at DESC
         LIMIT ? OFFSET ?`);
+    }
 
     const rows = statement.all(size, (page - 1) * size);
 
