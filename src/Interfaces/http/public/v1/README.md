@@ -88,6 +88,7 @@ https://story-api.dicoding.dev/v1
 - Parameters
   - `page` as `int`, optional
   - `size` as `int`, optional
+  - `location` as `1 | 0`, optional, default `0`
 - Method
   - GET
 - Headers
